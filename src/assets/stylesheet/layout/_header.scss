@@ -1,0 +1,188 @@
+.header-container {
+  width: 100%;
+  border-bottom: 1px solid map-get($color, border-bottom);
+  // box-shadow: 1px 2px 8px map-get($color, box-shadow);
+  background-image: url("../../images/banner-bg.png");
+  background-color: map-get($color, white);
+  z-index: 999;
+  .logo {
+    @include pxRem(font-size, 28);
+    font-weight: bold;
+    color: map-get($color, text-black);
+  }
+  .hide-lg {
+    display: none;
+  }
+  .header {
+    @extend %flex-between;
+    align-items: center;
+    padding: 30px 0;
+    .header-center {
+      ul {
+        @extend %flex-between;
+        li {
+          font-weight: 500;
+          font-size: 20px;
+        }
+      }
+    }
+    .header-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .header-right-desktop {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .form-group {
+        display: none;
+      }
+      .form-search {
+        margin-right: 20px;
+        position: relative;
+        .form-control {
+          padding-left: 15px;
+          border-radius: 30px;
+          // border: 2px solid map-get($color, border);
+          width: 400px;
+        }
+        input {
+          padding: 10px 10px;
+          &::placeholder {
+            padding-left: 5px;
+          }
+          &:focus {
+            border-color: map-get($color, primary);
+            .btn {
+              color: map-get($color, primary);
+            }
+          }
+        }
+        .btn-search {
+          padding: 0;
+          i {
+            font-size: map-get($font-size, m);
+          }
+        }
+      }
+      .fa-user {
+        margin-right: 5px;
+      }
+      .avatar {
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        .avatar-img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+        }
+        .avatar-alpha {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          color: map-get($color, text-black);
+          font-weight: 700;
+          font-size: map-get($font-size, xl);
+        }
+        &:hover .avatar-alpha {
+          color: map-get($color, white);
+        }
+      }
+    }
+    .btn {
+      font-size: 18px;
+      background-color: transparent;
+      transition: all, 0.3s;
+      text-transform: uppercase;
+      &:hover {
+        color: map-get($color, white);
+      }
+    }
+    .hide {
+      display: none !important;
+    }
+  }
+  .layout_padding {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    .container-fluid {
+      padding: 0 20px;
+    }
+    .banner {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .row {
+      display: flex;
+    }
+    .col-1 {
+      text-align: center;
+      .left-img {
+        width: 100%;
+        float: left;
+        margin-top: 40px;
+        text-align: center;
+      }
+      .number-text {
+        padding: 10px 0;
+        color: map-get($color, white);
+      }
+    }
+    .furniture-text {
+      padding-bottom: 50px;
+      font-size: 85px;
+      font-weight: bold;
+      text-transform: uppercase;
+      line-height: 1.2;
+      color: map-get($color, white);
+      strong {
+        color: map-get($color, text-black);
+      }
+    }
+    .btn-shopnow {
+      width: 191 px;
+      background: map-get($color, white);
+      padding: 9 px 0 px;
+      color: map-get($color, text-black);
+      font-size: 17px;
+      display: inline-block;
+      text-align: center;
+      margin-top: 20 px;
+      text-transform: uppercase;
+      font-weight: 500;
+      box-shadow: #000 -7px 7px 0px -1px;
+      &:hover {
+        background-color: map-get($color, primary);
+        color: map-get($color, white);
+      }
+    }
+    .fa-angle-right {
+      padding-left: 10px;
+    }
+  }
+}
+input[type="search"]::-ms-clear {
+  display: none;
+  width: 0;
+  height: 0;
+}
+input[type="search"]::-ms-reveal {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+/* clears the 'X' from Chrome */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
