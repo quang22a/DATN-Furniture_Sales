@@ -1,0 +1,62 @@
+.page-footer {
+  .top-footer {
+    padding: 50px 0;
+    text-align: center;
+    background-color: map-get($color, footer);
+    color: map-get($color, white);
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+    }
+    .list-menu {
+      padding: 20px 0;
+      display: flex;
+      justify-content: center;
+      .item-menu {
+        padding: 0 20px;
+        .btn {
+          font-size: 18px;
+          color: map-get($color, white);
+          font-weight: 600;
+          &:hover {
+            transition: 0.2s;
+            color: map-get($color, primary);
+          }
+        }
+      }
+    }
+    .description-footer {
+      font-size: 16px;
+    }
+    .contact {
+      margin-top: 50px;
+      p {
+        font-size: 22px;
+        font-weight: bold;
+      }
+      .list-contact {
+        padding-top: 20px;
+        display: flex;
+        justify-content: center;
+        li {
+          text-align: center;
+          padding: 0 20px;
+          i {
+            font-size: 20px;
+          }
+          a {
+            padding-left: 10px;
+            color: map-get($color, white);
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+  .bottom-footer {
+    padding: 22px 0;
+    text-align: center;
+    background-color: map-get($color, primary);
+    color: map-get($color, white);
+  }
+}
