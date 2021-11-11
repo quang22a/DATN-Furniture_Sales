@@ -2,26 +2,13 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { Input } from "../partials/Input";
-import linrIcon from "../../../../assets/images/linricon.png";
 import img1 from "../../../../assets/images/img1.png";
-import img2 from "../../../../assets/images/img2.png";
 
 export const Header = () => {
   const [show, setShow] = useState(false);
-  const [hideAction, setHideAction] = useState(true);
-  const token = "123";
-
-  const handleClick = () => {
-    setShow(true);
-  };
-  const handleClose = () => {
-    setShow(false);
-  };
-  const handleHide = (status) => {
-    if (hideAction === false) {
-      setHideAction(true);
-    } else setHideAction(status);
-  };
+  const [quantityCart, setQuantityCart] = useState(2);
+  const [showSearch, setShowSearch] = useState(false);
+  const token = "";
 
   return (
     <header className="header-container">
@@ -55,32 +42,30 @@ export const Header = () => {
           </div>
           <div className="header-right">
             <form className="form-search" action="/">
-              <Input
-                type={"search"}
-                className={`form-control ${!show ? "hide-mb" : "block"}`}
-                label={""}
-                placeholder={"Search"}
-                id={"search"}
-                validate={""}
-                para={""}
-              />
+              {showSearch ? (
+                <Input
+                  type={"search"}
+                  className={`form-control ${!show ? "hide-mb" : "block"}`}
+                  label={""}
+                  placeholder={"Search"}
+                  id={"search"}
+                  validate={""}
+                  para={""}
+                />
+              ) : (
+                ""
+              )}
+
               <button
                 type="button"
                 className={`btn btn-outline btn-search ${
                   show ? "hide-mb" : "block"
                 }`}
-                onClick={() => handleClick()}
+                onClick={() => {
+                  setShowSearch(!showSearch);
+                }}
               >
                 <i className="fa fa-search" aria-hidden="true"></i>
-              </button>
-              <button
-                type="button"
-                className={`btn btn-outline btn-search btn-close hide-lg ${
-                  !show ? "hide-mb" : "block"
-                }`}
-                onClick={() => handleClose()}
-              >
-                <i className="fa fa-times" aria-hidden="true"></i>
               </button>
             </form>
             <div className={`header-right-desktop ${token && "hide"}`}>
@@ -93,15 +78,29 @@ export const Header = () => {
               </Link>
             </div>
             {token && (
-              <div className="avatar-header">
-                <a href="/profile">
-                  <div className="avatar">
-                    <span className="avatar-alpha">
-                      <i className="fas fa-user"></i>
-                    </span>
-                  </div>
-                </a>
-              </div>
+              <>
+                <div className="avatar-header">
+                  <a href="/profile">
+                    <div className="avatar">
+                      <span className="avatar-alpha">
+                        <i className="fas fa-user"></i>
+                      </span>
+                    </div>
+                  </a>
+                </div>
+                <div className="cart-header">
+                  <a href="/cart">
+                    <div className="cart">
+                      <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    {quantityCart ? (
+                      <span className="quantity-cart">{quantityCart}</span>
+                    ) : (
+                      ""
+                    )}
+                  </a>
+                </div>
+              </>
             )}
           </div>
         </div>
@@ -114,12 +113,12 @@ export const Header = () => {
                 {`Mới nhất${"\n"}`}
                 <strong>sản phẩm nội thất</strong>
               </h1>
-              <a href="#" className="btn btn-shopnow">
+              <a href="/product" className="btn btn-shopnow">
                 Mua ngay
                 <i class="fa fa-angle-right"></i>
               </a>
             </div>
-            <div className="col-6">
+            <div className="col-7">
               <div>
                 <img src={img1} />
               </div>

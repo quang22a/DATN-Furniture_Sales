@@ -4,7 +4,7 @@
   margin: 0 auto;
 }
 .row {
-  margin: 0 -10px;
+  margin: 0 -20px;
   flex-wrap: wrap;
 }
 @include columns-responsive($colMax, "", "", 20px, 0px);

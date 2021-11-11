@@ -1,0 +1,155 @@
+.main {
+  padding: 30px 0;
+}
+.section-category {
+  padding: 40px 0;
+  .title-h2 {
+    padding-bottom: 40px;
+    text-align: center;
+    color: map-get($color, primary);
+    strong {
+      color: map-get($color, text-black);
+    }
+  }
+  .category-group {
+    display: flex;
+    flex-wrap: wrap;
+    .category-item {
+      padding-top: 40px;
+      &.up {
+        padding-top: 0;
+      }
+      .cate-item-description {
+        color: map-get($color, text-black);
+        .cate-body {
+          padding: 20px 0 10px 0;
+          .cate-name {
+            text-align: center;
+            font-weight: 500;
+            font-size: 26px;
+          }
+        }
+      }
+    }
+  }
+}
+.section-brand {
+  padding: 40px 0;
+  box-shadow: #ddd 0px 0px 19px 8px;
+  .title-h2 {
+    padding-bottom: 40px;
+    text-align: center;
+    color: map-get($color, primary);
+    strong {
+      color: map-get($color, text-black);
+    }
+  }
+  .brand-group {
+    display: flex;
+    .brand-item {
+      .brand-item-description {
+        padding: 10px;
+        color: map-get($color, text-black);
+        .product-img {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 320px;
+        }
+        .brand-body {
+          padding: 20px 0 10px 0;
+          text-align: center;
+          .product-name {
+            padding-bottom: 10px;
+            font-weight: 600;
+            font-size: 20px;
+          }
+          .product-price {
+            font-weight: 600;
+            font-size: 18px;
+            &::after {
+              content: " VNĐ";
+            }
+          }
+        }
+        &:hover {
+          transition: 0.3s;
+          background-color: map-get($color, primary);
+        }
+      }
+    }
+  }
+}
+.section-notification {
+  padding: 40px 0;
+  .title-h2 {
+    padding-bottom: 40px;
+    text-align: center;
+    color: map-get($color, text-black);
+  }
+  .notification {
+    display: flex;
+    .msg-notification {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      p {
+        font-size: 20px;
+      }
+    }
+    .img-notification {
+      width: 50%;
+    }
+  }
+}
+.section-product-new {
+  padding: 40px 0;
+  box-shadow: #ddd 0px 0px 19px 8px;
+  .title-h2 {
+    padding-bottom: 40px;
+    text-align: center;
+    color: map-get($color, primary);
+    strong {
+      color: map-get($color, text-black);
+    }
+  }
+  .product-group {
+    display: flex;
+    .product-item {
+      .product-item-description {
+        padding: 10px;
+        color: map-get($color, text-black);
+        .product-img {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 200px;
+          img {
+            object-fit: cover;
+          }
+        }
+        .product-body {
+          padding: 20px 0 10px 0;
+          text-align: center;
+          .product-name {
+            padding-bottom: 10px;
+            font-weight: 600;
+            font-size: 20px;
+          }
+          .product-price {
+            font-weight: 600;
+            font-size: 18px;
+            &::after {
+              content: " VNĐ";
+            }
+          }
+        }
+        &:hover {
+          transition: 0.3s;
+          box-shadow: #ddd 0px 0px 19px 8px;
+        }
+      }
+    }
+  }
+}

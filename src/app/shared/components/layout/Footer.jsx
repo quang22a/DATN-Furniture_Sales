@@ -1,47 +1,64 @@
+import { Link } from "react-router-dom";
+
+import { Input } from "../partials/Input";
+
 export const Footer = () => {
   return (
     <footer className="page-footer">
       <div className="top-footer">
-        <div className="container">
-          <p className="logo">Luxury House</p>
-          <ul className="list-menu">
-            <li className="item-menu">
-              <a href="/" className="btn btn-outline">
-                Trang chủ
-              </a>
-            </li>
-            <li className="item-menu">
-              <a href="/product" className="btn btn-outline">
-                Sản phẩm
-              </a>
-            </li>
-            <li className="item-menu">
-              <a href="/contact" className="btn btn-outline">
-                Liên lạc
-              </a>
-            </li>
-          </ul>
-          <p className="description-footer">
-            It is a long established fact that a reader will be distracted by
-            the readable content of a page when looking at its layout. The point
-            of using Lorem I
-          </p>
-          <div className="contact">
-            <p>Liên hệ</p>
-            <ul className="row list-contact">
-              <li>
-                <i class="fas fa-phone-alt"></i>
-                <a href="tel:+0123123123" className="phone-number">
-                  0123123123
-                </a>
-              </li>
-              <li>
-                <i class="fas fa-envelope"></i>
-                <a href="" className="email">
-                  luxuryhouse2021@gmail.com
-                </a>
-              </li>
-            </ul>
+        <div className="container ">
+          <div className="row">
+            <div className="col-4">
+              <p className="logo">Luxury House</p>
+              <div className="follow">
+                <p>Theo dõi chúng tôi</p>
+                <div className="app">
+                  <a href="https://facebook.com" target="_blank">
+                    Facebook-
+                  </a>
+                  <a href="https://facebook.com" target="_blank">
+                    Instagram
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div className="col-4">
+              <p className="title-footer">Về Luxury House</p>
+              <ul className="list-about">
+                <li className="item">
+                  <Link to="/">Trang chủ</Link>
+                </li>
+                <li className="item">
+                  <Link to="/product">Sản phẩm</Link>
+                </li>
+                <li className="item space">
+                  <Link to="/insurance">Bảo hành</Link>
+                </li>
+                <li className="item">
+                  <Link to="/delivery">Giao hàng</Link>
+                </li>
+                <li className="item">
+                  <Link to="/terms">Điều khoản riêng tư</Link>
+                </li>
+              </ul>
+            </div>
+            <div className="col-4">
+              <p className="title-footer">Newsletter</p>
+              <p className="des">
+                Hãy để lại email của bạn để nhận được những ý tưởng trang trí
+                mới và những thông tin, ưu đãi từ Luxury House
+              </p>
+              <form className="form-newsletter">
+                <Input
+                  id="email-footer"
+                  placeholder="Nhập email của bạn"
+                  className="form-control"
+                />
+                <button type="button" className="btn btn-contact">
+                  Đăng ký
+                </button>
+              </form>
+            </div>
           </div>
         </div>
       </div>
