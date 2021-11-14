@@ -1,55 +1,79 @@
 .page-footer {
   .top-footer {
     padding: 50px 0;
-    text-align: center;
     background-color: map-get($color, footer);
     color: map-get($color, white);
+    .row {
+      display: flex;
+    }
     .logo {
       font-size: 22px;
       font-weight: bold;
+      color: map-get($color, primary);
     }
-    .list-menu {
-      padding: 20px 0;
-      display: flex;
-      justify-content: center;
-      .item-menu {
-        padding: 0 20px;
-        .btn {
-          font-size: 18px;
-          color: map-get($color, white);
-          font-weight: 600;
+    .follow {
+      padding-top: 20px;
+      p {
+        padding-bottom: 20px;
+        font-size: 18px;
+        color: map-get($color, primary);
+        font-weight: 500;
+      }
+      .app {
+        a {
+          color: white;
+          font-size: 14px;
           &:hover {
-            transition: 0.2s;
             color: map-get($color, primary);
           }
         }
       }
     }
-    .description-footer {
-      font-size: 16px;
+    .title-footer {
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      display: inline-block;
+      font-size: 20px;
+      border-bottom: 3px solid white;
+      color: map-get($color, primary);
+      font-weight: 600;
     }
-    .contact {
-      margin-top: 50px;
-      p {
-        font-size: 22px;
-        font-weight: bold;
-      }
-      .list-contact {
-        padding-top: 20px;
-        display: flex;
-        justify-content: center;
-        li {
-          text-align: center;
-          padding: 0 20px;
-          i {
-            font-size: 20px;
-          }
-          a {
-            padding-left: 10px;
-            color: map-get($color, white);
-            font-size: 18px;
+    .list-about {
+      .item {
+        padding-bottom: 10px;
+        a {
+          color: white;
+          &:hover {
+            color: map-get($color, primary);
           }
         }
+        &.space {
+          padding-top: 20px;
+        }
+      }
+    }
+    .des {
+      padding-bottom: 20px;
+      line-height: 1.2;
+    }
+    .form-newsletter {
+      display: flex;
+      .form-group {
+        display: inline;
+        .form-control {
+          background-color: rgba(255, 255, 255, 0.2);
+          color: white;
+          &::placeholder {
+            color: white;
+          }
+        }
+      }
+      .btn-contact {
+        float: right;
+        text-transform: uppercase;
+        background-color: black;
+        color: white;
+        font-size: 14px;
       }
     }
   }

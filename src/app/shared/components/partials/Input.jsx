@@ -14,6 +14,7 @@ export const Input = (props) => {
     value,
     onChange,
   } = props;
+  console.log(errors?.message);
   return (
     <div className={para ? "form-group terms" : "form-group"}>
       <label htmlFor={id}>{label}</label>

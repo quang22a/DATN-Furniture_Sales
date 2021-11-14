@@ -1,8 +1,7 @@
 .form-control {
-  display: block;
   width: 100%;
-  font-size: map-get($font-size, s);
-  padding: 8px 10px;
+  font-size: 14px;
+  padding: 10px 10px;
   background: map-get($color, white);
   outline: none !important;
   display: block;

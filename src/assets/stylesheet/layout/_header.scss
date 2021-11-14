@@ -35,17 +35,19 @@
         align-items: center;
         justify-content: center;
       }
-      .form-group {
-        display: none;
-      }
       .form-search {
         margin-right: 20px;
         position: relative;
+        .form-group {
+          position: absolute;
+          right: 0;
+          top: 20px;
+          width: 200px;
+        }
         .form-control {
           padding-left: 15px;
           border-radius: 30px;
-          // border: 2px solid map-get($color, border);
-          width: 400px;
+          width: 200px;
         }
         input {
           padding: 10px 10px;
@@ -107,6 +109,21 @@
     }
     .hide {
       display: none !important;
+    }
+    .cart-header {
+      position: relative;
+      .quantity-cart {
+        position: absolute;
+        width: 15px;
+        height: 15px;
+        text-align: center;
+        top: -8px;
+        right: -7px;
+        color: map-get($color, text-black);
+        background-color: white;
+        border-radius: 50%;
+        font-size: 14px;
+      }
     }
   }
   .layout_padding {
