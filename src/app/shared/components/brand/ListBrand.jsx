@@ -20,7 +20,6 @@ export const ListBrand = ({ data }) => {
                         <div className="product-title">
                           <h4 className="product-name">{item?.name}</h4>
                         </div>
-                        <p className="product-price">{item?.price}</p>
                       </div>
                     </div>
                   </Link>

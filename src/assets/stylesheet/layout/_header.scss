@@ -71,6 +71,61 @@
       .fa-user {
         margin-right: 5px;
       }
+      .avatar-header {
+        display: flex;
+        .dropdown-user {
+          position: relative;
+          .btn {
+            padding-left: 0;
+            &:hover {
+              i {
+                color: map-get($color, text);
+              }
+            }
+          }
+          .dropdown-user-content {
+            position: relative;
+            right: 44%;
+            position: absolute;
+            background-color: map-get($color, white);
+            min-width: 130px;
+            top: 144%;
+            box-shadow: 1px 2px 8px map-get($color, box-shadow);
+            z-index: 1;
+          }
+          .dropdown-user-item {
+            padding: 5px 0;
+            color: map-get($color, text);
+            text-align: center;
+            border-bottom: 1px solid map-get($color, border-art);
+            transition: all, 0.3s;
+            .btn {
+              transition: all, 0.3s;
+              color: map-get($color, gray-1);
+              width: 100%;
+              padding: 5px 0;
+              text-transform: unset;
+              i {
+                margin-right: 5px;
+              }
+              &:hover {
+                i {
+                  color: map-get($color, white);
+                }
+              }
+            }
+            &:last-child {
+              bottom: 0;
+            }
+            &:hover {
+              background-color: map-get($color, primary);
+              .btn {
+                color: map-get($color, white);
+              }
+            }
+          }
+        }
+      }
       .avatar {
         width: 40px;
         height: 40px;
@@ -112,6 +167,7 @@
     }
     .cart-header {
       position: relative;
+      margin-right: 8px;
       .quantity-cart {
         position: absolute;
         width: 15px;

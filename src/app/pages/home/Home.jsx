@@ -1,4 +1,6 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategoriesTrending, getBrandsFeatured } from "./stores/action";
 
 import { ListCategory } from "../../shared/components/category/ListCategory";
 import { ListBrand } from "../../shared/components/brand/ListBrand";
@@ -17,6 +19,26 @@ import product from "../../../assets/images/product.jpg";
 const ListProductNew = PageRenderer(ListProduct);
 
 const Home = () => {
+  const dispatch = useDispatch();
+
+  const errorCategory = useSelector((state) => state.homeReducer.errorCategory);
+  const errorBrand = useSelector((state) => state.homeReducer.errorBrand);
+  const categoriesTrending = useSelector(
+    (state) => state.homeReducer.dataCategoryTrending
+  );
+  const brandFeatured = useSelector(
+    (state) => state.homeReducer.dataBrandFeatured
+  );
+
+  useEffect(() => {
+    console.log(categoriesTrending, brandFeatured);
+  }, [categoriesTrending, brandFeatured]);
+
+  useEffect(() => {
+    dispatch(getCategoriesTrending());
+    dispatch(getBrandsFeatured());
+  }, []);
+
   const listCategory = [
     {
       id: 1,
@@ -125,7 +147,7 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="section-product-new">
+      <section className="section-product">
         <div className="container">
           <h2 className="title-h2">
             <strong>Sản phẩm </strong>mới nhất

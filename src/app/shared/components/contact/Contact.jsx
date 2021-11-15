@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Input } from "../partials/Input";
 import { useForm } from "react-hook-form";
 import { validateEmail } from "../../validate";
+import img from "../../../../assets/images/sectioncontact.jpg";
 
 export const Contact = () => {
   const {
@@ -85,10 +86,7 @@ export const Contact = () => {
             </form>
           </div>
           <div className="img">
-            <img
-              src="https://beta.nhaxinh.com/wp-content/uploads/2021/10/lien-he-nha-xinh.jpg"
-              alt="image liên hệ"
-            />
+            <img src={img} alt="image liên hệ" />
           </div>
         </div>
       </div>

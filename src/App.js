@@ -4,6 +4,7 @@ import appRoutes from "./app/appRoutes";
 
 import { Header } from "./app/shared/components/layout/Header";
 import { Footer } from "./app/shared/components/layout/Footer";
+import { Modal } from "./app/shared/components/modules/Modal";
 import { RouterOutlet } from "./app/core/modules/custom-router-dom";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
         <RouterOutlet routes={appRoutes} />
       </Suspense>
       <Footer />
+      <Modal />
     </Router>
   );
 }

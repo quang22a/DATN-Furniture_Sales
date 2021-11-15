@@ -1,0 +1,114 @@
+.section-product-detail {
+  padding-top: 40px;
+  .product-detail {
+    display: flex;
+    .product-detail-img {
+      padding: 50px;
+    }
+    .product-name {
+      margin-bottom: 10px;
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: map-get($color, text-black);
+    }
+    .is-divider {
+      margin: 10px 0;
+      height: 3px;
+      max-width: 30px;
+      width: 100%;
+      display: block;
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+    .product-price {
+      padding: 10px 0;
+      font-size: 14px;
+    }
+    .product-attribute {
+      padding: 14px 0;
+      p {
+        display: inline-block;
+        width: 130px;
+        font-size: 18px;
+        font-weight: 600;
+      }
+      span {
+        font-size: 14px;
+      }
+    }
+    .form-add-to-cart {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      .quantity-product {
+        .quantity {
+          margin: 0;
+          width: 40px;
+          height: 40px;
+          background-color: white;
+          border: 1px solid #ebeaea;
+          outline: none;
+          text-align: center;
+        }
+      }
+      .btn-primary {
+        margin-left: 40px;
+        font-size: 16px;
+      }
+    }
+    .more-info {
+      margin-top: 40px;
+      .list-option {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #ccc;
+        li {
+          button {
+            padding: 10px 0;
+            background-color: transparent;
+            color: rgba(102, 102, 102, 0.85);
+            font-size: 20px;
+            cursor: pointer;
+            &:hover {
+              color: map-get($color, text-black);
+            }
+          }
+          &.active button {
+            color: map-get($color, text-black);
+          }
+        }
+      }
+      .tab-panels {
+        margin-top: 30px;
+        .hide {
+          display: none;
+        }
+        div {
+          .title {
+            font-weight: 500;
+            font-size: 18px;
+            text-transform: uppercase;
+          }
+          p {
+            padding-bottom: 15px;
+            line-height: 1.3;
+          }
+          .fa-star {
+            &.active {
+              color: map-get($color, primary);
+            }
+            &:hover {
+              color: map-get($color, primary);
+            }
+          }
+          .form-control {
+            margin: 10px auto;
+          }
+          .btn-black {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+}
