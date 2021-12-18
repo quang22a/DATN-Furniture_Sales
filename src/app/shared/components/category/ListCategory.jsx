@@ -11,10 +11,10 @@ export const ListCategory = ({ data }) => {
                   className={`category-item col-4 ${index === 1 ? "up" : ""}`}
                   key={`cate-${index}`}
                 >
-                  <Link to={`/product?category=${item?.title.toLowerCase()}`}>
+                  <Link to={`/product?category=${item?.title?.toLowerCase()}`}>
                     <div className="cate-item-description">
                       <div className="cate-img">
-                        <img src={item?.img} alt={item?.name} />
+                        <img src={item?.image} alt={item?.name} />
                       </div>
                       <div className="cate-body">
                         <div className="cate-title">

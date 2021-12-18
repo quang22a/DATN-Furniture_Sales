@@ -1,98 +1,72 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router";
 
+import Pagination from "@mui/material/Pagination";
 import PageRenderer from "../../../shared/components/modules/PageRenderer";
 import { ListProduct } from "../../../shared/components/product/ListProduct";
-import product from "../../../../assets/images/product.jpg";
+import {
+  getListProduct,
+  getListCategory,
+  getListBrand,
+} from "../stores/action";
 
 const ListProductRenderer = PageRenderer(ListProduct);
 
 const ProductList = () => {
-  const { register, watch, control, setValue } = useForm();
-  const [sortPrice, setSortPrice] = useState("asc");
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const [sortPriceState, setSortPrice] = useState("asc");
+  const [searchCategory, setSearchCategory] = useState(null);
+  const [searchBrand, setSearchBrand] = useState(null);
+  const [page, setPage] = useState(1);
 
-  const listProduct = [
-    {
-      id: 1,
-      title: "bed",
-      name: "Giường",
-      img: product,
-      price: 80,
-    },
-    {
-      id: 2,
-      title: "chair",
-      name: "Ghế",
-      img: product,
-    },
-    {
-      id: 3,
-      title: "cabinet",
-      name: "Tủ",
-      img: product,
-    },
-    {
-      id: 4,
-      title: "shoescabinet",
-      name: "Tủ giày",
-      img: product,
-    },
-    {
-      id: 5,
-      title: "bed",
-      name: "Giường",
-      img: product,
-      price: 80,
-    },
-    {
-      id: 6,
-      title: "chair",
-      name: "Ghế",
-      img: product,
-    },
-    {
-      id: 7,
-      title: "cabinet",
-      name: "Tủ",
-      img: product,
-    },
-    {
-      id: 8,
-      title: "shoescabinet",
-      name: "Tủ giày",
-      img: product,
-    },
-    {
-      id: 9,
-      title: "bed",
-      name: "Giường",
-      img: product,
-      price: 80,
-    },
-    {
-      id: 10,
-      title: "chair",
-      name: "Ghế",
-      img: product,
-    },
-    {
-      id: 11,
-      title: "cabinet",
-      name: "Tủ",
-      img: product,
-    },
-    {
-      id: 12,
-      title: "shoescabinet",
-      name: "Tủ giày",
-      img: product,
-    },
-  ];
+  const listProducts = useSelector((state) => state.productReducer.dataList);
+  const listCategories = useSelector(
+    (state) => state.productReducer.listCategories
+  );
+  const listBrands = useSelector((state) => state.productReducer.listBrands);
+  const search = useSelector((state) => state.searchReducer.textSearch);
+
+  useEffect(() => {
+    dispatch(getListCategory());
+    dispatch(getListBrand());
+  }, []);
+
+  useEffect(() => {
+    setPage(1);
+    dispatch(
+      getListProduct(searchCategory, searchBrand, sortPriceState, 1, 12, search)
+    );
+  }, [sortPriceState, searchCategory, searchBrand, search]);
+
+  useEffect(() => {
+    dispatch(
+      getListProduct(
+        searchCategory,
+        searchBrand,
+        sortPriceState,
+        page,
+        12,
+        search
+      )
+    );
+  }, [page]);
 
   const searchPrice = (e) => {
     setSortPrice(e.target.value);
   };
+
+  const changeSearchCategory = (e) => {
+    setSearchCategory(e.target.value);
+  };
+
+  const changeSearchBrand = (e) => {
+    setSearchBrand(e.target.value);
+  };
+
   return (
     <section className="section-product-list">
       <div className="container">
@@ -102,22 +76,30 @@ const ProductList = () => {
               <p>Danh mục</p>
               <select
                 className="sort-list"
-                defaultValue="asc"
-                onChange={(e) => searchPrice(e)}
+                onChange={(e) => changeSearchCategory(e)}
               >
-                <option value="asc">Giá từ thấp đến cao</option>
-                <option value="desc"> Giá từ cao đến thấp</option>
+                <option value="">Chọn danh mục</option>
+                {listCategories &&
+                  listCategories.map((item, index) => (
+                    <option value={item._id} key={`category-${index}`}>
+                      {item.name}
+                    </option>
+                  ))}
               </select>
             </div>
             <div className="sort">
               <p>Thương hiệu</p>
               <select
                 className="sort-list"
-                defaultValue="asc"
-                onChange={(e) => searchPrice(e)}
+                onChange={(e) => changeSearchBrand(e)}
               >
-                <option value="asc">Giá từ thấp đến cao</option>
-                <option value="desc"> Giá từ cao đến thấp</option>
+                <option value="">Chọn thương hiệu</option>
+                {listBrands &&
+                  listBrands.map((item, index) => (
+                    <option value={item._id} key={`brand-${index}`}>
+                      {item.name}
+                    </option>
+                  ))}
               </select>
             </div>
             <div className="sort">
@@ -133,7 +115,18 @@ const ProductList = () => {
             </div>
           </div>
           <div className="row list-product">
-            <ListProductRenderer data={listProduct} />
+            <ListProductRenderer data={listProducts?.result} />
+          </div>
+          <div className="pagination">
+            <Pagination
+              count={listProducts?.numPages}
+              showFirstButton
+              showLastButton
+              page={page}
+              onChange={(e, value) => {
+                setPage(value);
+              }}
+            />
           </div>
         </form>
       </div>

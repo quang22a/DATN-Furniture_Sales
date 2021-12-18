@@ -54,7 +54,7 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          height: 320px;
+          height: 220px;
         }
         .brand-body {
           padding: 20px 0 10px 0;
@@ -64,12 +64,9 @@
             font-weight: 600;
             font-size: 20px;
           }
-          .product-price {
+          .price {
             font-weight: 600;
-            font-size: 18px;
-            &::after {
-              content: " VNĐ";
-            }
+            font-size: 16px;
           }
         }
         &:hover {

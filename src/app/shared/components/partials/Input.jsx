@@ -5,6 +5,7 @@ export const Input = (props) => {
     id,
     type,
     placeholder,
+    defaultValue,
     validate,
     errors,
     para,
@@ -20,24 +21,26 @@ export const Input = (props) => {
       {onChange ? (
         <input
           id={id}
-          name={name}
+          name={id}
           className={className}
           placeholder={placeholder}
           autoComplete="off"
           type={type}
           value={value}
+          defaultValue={defaultValue}
           {...validate}
           onChange={(e) => onChange(e)}
         />
       ) : (
         <input
           id={id}
-          name={name}
+          name={id}
           className={className}
           placeholder={placeholder}
           autoComplete="off"
           type={type}
           value={value}
+          defaultValue={defaultValue}
           {...validate}
         />
       )}

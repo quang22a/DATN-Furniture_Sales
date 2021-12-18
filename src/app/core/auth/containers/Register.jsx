@@ -60,9 +60,18 @@ const Register = () => {
 
   const inputData = [
     {
+      id: "name",
+      type: "text",
+      label: "Họ tên",
+      className: "form-control",
+      validate: register("name", { required: "Bạn phải nhập họ tên" }),
+      errors: errors.name,
+      para: "",
+    },
+    {
       id: "phone",
       type: "text",
-      label: "Số điện thoại *",
+      label: "Số điện thoại",
       className: "form-control",
       validate: register("phone", { required: "Bạn phải nhập số điện thoại" }),
       errors: errors.phone,
@@ -71,25 +80,25 @@ const Register = () => {
     {
       id: "email",
       type: "text",
-      label: "Email *",
+      label: "Email",
       className: "form-control",
       validate: register("email", { ...validateEmail }),
       errors: errors.email,
       para: "",
     },
     {
-      id: "fullname",
+      id: "address",
       type: "text",
-      label: "Họ tên *",
+      label: "Địa chỉ",
       className: "form-control",
-      validate: register("fullname", { required: "Bạn phải nhập họ tên" }),
-      errors: errors.fullname,
+      validate: register("address", { required: "Bạn phải nhập địa chỉ" }),
+      errors: errors.address,
       para: "",
     },
     {
       id: "password",
       type: "password",
-      label: "Mật khẩu *",
+      label: "Mật khẩu",
       className: "form-control",
       validate: register("password", {
         required: "Bạn phải nhập mật khẩu",
@@ -102,10 +111,11 @@ const Register = () => {
 
   const showError = () => {
     if (error) {
-      if (msg.response.data.errors) {
-        return msg.response.data.errors[0];
+      console.log(error);
+      if (msg.response?.data?.errors) {
+        return msg.response?.data?.errors[0];
       } else {
-        return msg.response.data.msg;
+        return msg.response?.data?.msg;
       }
     } else {
       return null;

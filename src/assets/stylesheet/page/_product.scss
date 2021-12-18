@@ -27,18 +27,29 @@
         .product-item {
           position: relative;
           margin-bottom: 40px;
-          .btn-add-cart {
+          .btn {
             display: none;
             position: absolute;
+            z-index: 50;
+          }
+          .btn-add-cart {
             bottom: 5%;
             left: 50%;
             transform: translateX(-50%);
-            z-index: 10;
+          }
+          .btn-edit-product {
+            bottom: 5%;
+            left: 30%;
+          }
+          .btn-delete-product {
+            bottom: 5%;
+            right: 30%;
           }
           &:hover {
-            .btn-add-cart {
+            .btn {
               display: block;
               transition: 0.3s;
+              z-index: 50;
             }
           }
         }
