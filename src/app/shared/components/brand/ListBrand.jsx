@@ -14,7 +14,7 @@ export const ListBrand = ({ data }) => {
                   <Link to={`/product?brands=${item?.title}`}>
                     <div className="brand-item-description">
                       <div className="product-img">
-                        <img src={item?.img} alt={item?.name} />
+                        <img src={item?.image} alt={item?.name} />
                       </div>
                       <div className="brand-body">
                         <div className="product-title">

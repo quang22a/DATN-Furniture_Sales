@@ -8,6 +8,10 @@ const intialState = {
   errorLogin: null,
   data: null,
   msg: null,
+  msgRequestReset: null,
+  errorRequestReset: null,
+  msgResetPass: null,
+  errorResetPass: null,
 };
 
 export const authReducer = (state = intialState, action) => {
@@ -48,6 +52,30 @@ export const authReducer = (state = intialState, action) => {
         ...state,
         error: null,
         msg: null,
+      };
+    case types.REQUEST_RESET_PASSWORD_SUCCESS:
+      return {
+        ...state,
+        errorRequestReset: true,
+        msgRequestReset: action.payload,
+      };
+    case types.REQUEST_RESET_PASSWORD_FAIL:
+      return {
+        ...state,
+        errorRequestReset: null,
+        msgRequestReset: action.payload,
+      };
+    case types.CHANGE_PASSWORD_RESET_SUCCESS:
+      return {
+        ...state,
+        errorResetPass: true,
+        msgResetPass: action.payload,
+      };
+    case types.CHANGE_PASSWORD_RESET_FAIL:
+      return {
+        ...state,
+        errorResetPass: null,
+        msgResetPass: action.payload,
       };
     default:
       return state;

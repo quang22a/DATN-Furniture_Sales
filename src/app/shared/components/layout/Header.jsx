@@ -2,34 +2,51 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
 
 import { Input } from "../partials/Input";
 import img1 from "../../../../assets/images/img1.png";
 import { AuthStorageService } from "../../../core/services/authStorage.service";
 import JwtHelper from "../../../core/helpers/jwtHelper";
+import { setTextSearch } from "../../../stores/search/action";
 
 const storage = new AuthStorageService();
 const jwt = new JwtHelper();
 
 export const Header = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const location = useLocation();
   const navigate = useNavigate();
-  const [quantityCart, setQuantityCart] = useState(2);
+  const dispatch = useDispatch();
+
   const [showSearch, setShowSearch] = useState(false);
   const [hideAction, setHideAction] = useState(true);
   const [isLogout, setLogout] = useState(false);
 
   const token = localStorage.getItem("token");
+  const cart = JSON.parse(localStorage.getItem("cart"));
   const id = jwt.getUserId();
+  const quantityCart = useSelector((state) => state.cartReducer.quantity);
 
   const handleHide = () => {
     setHideAction(!hideAction);
   };
+
   const handleLogout = async () => {
     storage.removeToken();
     localStorage.removeItem("userInfo");
     setLogout(true);
   };
+
+  const onSubmit = (data) => {
+    dispatch(setTextSearch(data.search.trim()));
+    navigate("/products");
+  };
+
   useEffect(() => {
     if (isLogout) {
       navigate("/");
@@ -70,28 +87,18 @@ export const Header = () => {
                 </nav>
               </div>
               <div className="header-right">
-                <form className="form-search" action="/">
-                  {showSearch ? (
-                    <Input
-                      type={"search"}
-                      className="form-control"
-                      label={""}
-                      placeholder={"Search"}
-                      id={"search"}
-                      validate={""}
-                      para={""}
-                    />
-                  ) : (
-                    ""
-                  )}
-
-                  <button
-                    type="button"
-                    className="btn btn-outline btn-search"
-                    onClick={() => {
-                      setShowSearch(!showSearch);
-                    }}
-                  >
+                <form className="form-search" onSubmit={handleSubmit(onSubmit)}>
+                  <Input
+                    type="search"
+                    className="form-control"
+                    label=""
+                    placeholder={"Tìm kiếm sản phẩm ..."}
+                    id="search"
+                    validate={register("search")}
+                    errors={errors.search}
+                    para={""}
+                  />
+                  <button type="submit" className="btn btn-outline btn-search">
                     <i className="fa fa-search" aria-hidden="true"></i>
                   </button>
                 </form>
@@ -111,11 +118,9 @@ export const Header = () => {
                         <div className="cart">
                           <i className="fas fa-shopping-cart"></i>
                         </div>
-                        {quantityCart ? (
-                          <span className="quantity-cart">{quantityCart}</span>
-                        ) : (
-                          ""
-                        )}
+                        <span className="quantity-cart">
+                          {quantityCart || 0}
+                        </span>
                       </Link>
                     </div>
                     <div className="avatar-header">
@@ -178,7 +183,7 @@ export const Header = () => {
               </div>
             </div>
           </div>
-          {location.pathname === "/" || location.pathname === "/products" ? (
+          {(location.pathname === "/" || location.pathname === "/products") && (
             <div className="banner_section layout_padding">
               <div className="container-fluid">
                 <div className="banner">
@@ -187,7 +192,7 @@ export const Header = () => {
                       {`Mới nhất${"\n"}`}
                       <strong>sản phẩm nội thất</strong>
                     </h1>
-                    <Link to="/product" className="btn btn-shopnow">
+                    <Link to="/products" className="btn btn-shopnow">
                       Mua ngay
                       <i className="fa fa-angle-right"></i>
                     </Link>
@@ -200,8 +205,6 @@ export const Header = () => {
                 </div>
               </div>
             </div>
-          ) : (
-            ""
           )}
         </header>
       ) : (

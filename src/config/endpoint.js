@@ -1,11 +1,25 @@
 const RESOURCES = {
   auth: "auth",
-  brand: "brand",
+  brand: {
+    index: "brand",
+    list: "brands",
+  },
   category: {
     index: "category",
-    s: "categories",
+    list: "categories",
   },
-  product: "product",
+  product: {
+    index: "product",
+    list: "products",
+  },
+  rating: {
+    index: "rating",
+    list: "ratings",
+  },
+  bill: {
+    index: "bill",
+  },
+  contact: "contact",
 };
 
 export const ENDPOINT = {
@@ -15,15 +29,29 @@ export const ENDPOINT = {
     registerStaff: `${RESOURCES.auth}/register-staff`,
     login: `${RESOURCES.auth}/login`,
     profile: `${RESOURCES.auth}/profile`,
+    updatePassword: `${RESOURCES.auth}/update-password`,
+    requestResetPass: `${RESOURCES.auth}/reset-password`,
+    confirmCode: `${RESOURCES.auth}/confirm-code`,
+    changePasswordReset: `${RESOURCES.auth}/change-password`,
   },
   brand: {
-    index: `${RESOURCES.brand}`,
+    index: `${RESOURCES.brand.index}`,
+    list: `${RESOURCES.brand.list}`,
   },
   category: {
     index: `${RESOURCES.category.index}`,
-    s: `${RESOURCES.category.s}`,
+    list: `${RESOURCES.category.list}`,
   },
   product: {
-    index: `${RESOURCES.product}`,
+    index: `${RESOURCES.product.index}`,
+    list: `${RESOURCES.product.list}`,
   },
+  rating: {
+    index: `${RESOURCES.rating.index}`,
+    list: `${RESOURCES.rating.list}`,
+  },
+  bill: {
+    index: `${RESOURCES.bill.index}`,
+  },
+  contact: `${RESOURCES.contact}`,
 };

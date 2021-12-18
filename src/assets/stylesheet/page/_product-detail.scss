@@ -20,9 +20,9 @@
       display: block;
       background-color: rgba(0, 0, 0, 0.1);
     }
-    .product-price {
+    .price {
       padding: 10px 0;
-      font-size: 14px;
+      font-size: 16px;
     }
     .product-attribute {
       padding: 14px 0;
@@ -63,6 +63,7 @@
         justify-content: space-between;
         border-bottom: 1px solid #ccc;
         li {
+          outline: none;
           button {
             padding: 10px 0;
             background-color: transparent;
@@ -106,6 +107,19 @@
           }
           .btn-black {
             font-size: 16px;
+          }
+        }
+        .comment-product {
+          margin-top: 20px;
+          border-top: 1px solid rgba(0, 0, 0, 0.1);
+          .list-comment {
+            .item-comment {
+              padding: 10px 0;
+              border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            }
+            .comment-user {
+              font-weight: 600;
+            }
           }
         }
       }

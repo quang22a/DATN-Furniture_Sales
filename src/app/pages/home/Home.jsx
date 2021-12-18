@@ -1,28 +1,25 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getCategoriesTrending, getBrandsFeatured } from "./stores/action";
+import {
+  getCategoriesTrending,
+  getBrandsFeatured,
+  getListProductNew,
+} from "./stores/action";
 
 import { ListCategory } from "../../shared/components/category/ListCategory";
 import { ListBrand } from "../../shared/components/brand/ListBrand";
 import { ListProduct } from "../../shared/components/product/ListProduct";
 import PageRenderer from "../../shared/components/modules/PageRenderer";
 import { Contact } from "../../shared/components/contact/Contact";
-import bedroom from "../../../assets/images/bedroom.jpg";
-import livingroom from "../../../assets/images/livingroom.jpg";
-import outdoor from "../../../assets/images/outdoor.jpg";
-import p1 from "../../../assets/images/p1.png";
-import p2 from "../../../assets/images/p2.png";
-import p3 from "../../../assets/images/p3.png";
-import p4 from "../../../assets/images/p4.png";
-import product from "../../../assets/images/product.jpg";
 
 const ListProductNew = PageRenderer(ListProduct);
 
 const Home = () => {
   const dispatch = useDispatch();
 
-  const errorCategory = useSelector((state) => state.homeReducer.errorCategory);
-  const errorBrand = useSelector((state) => state.homeReducer.errorBrand);
+  const listProductsNew = useSelector(
+    (state) => state.homeReducer.dataProductsNew
+  );
   const categoriesTrending = useSelector(
     (state) => state.homeReducer.dataCategoryTrending
   );
@@ -31,88 +28,11 @@ const Home = () => {
   );
 
   useEffect(() => {
-    console.log(categoriesTrending, brandFeatured);
-  }, [categoriesTrending, brandFeatured]);
-
-  useEffect(() => {
     dispatch(getCategoriesTrending());
     dispatch(getBrandsFeatured());
+    dispatch(getListProductNew());
   }, []);
 
-  const listCategory = [
-    {
-      id: 1,
-      title: "outdoor",
-      name: "Ngoài trời",
-      img: outdoor,
-    },
-    {
-      id: 2,
-      title: "livingroom",
-      name: "Phòng khách",
-      img: livingroom,
-    },
-    {
-      id: 3,
-      title: "bedroom",
-      name: "Phòng ngủ",
-      img: bedroom,
-    },
-  ];
-  const listBrand = [
-    {
-      id: 1,
-      title: "bed",
-      name: "Giường",
-      img: p1,
-      price: 80,
-    },
-    {
-      id: 2,
-      title: "chair",
-      name: "Ghế",
-      img: p2,
-    },
-    {
-      id: 3,
-      title: "cabinet",
-      name: "Tủ",
-      img: p3,
-    },
-    {
-      id: 3,
-      title: "shoescabinet",
-      name: "Tủ giày",
-      img: p4,
-    },
-  ];
-  const listProduct = [
-    {
-      id: 1,
-      title: "bed",
-      name: "Giường",
-      img: product,
-      price: 80,
-    },
-    {
-      id: 2,
-      title: "chair",
-      name: "Ghế",
-      img: product,
-    },
-    {
-      id: 3,
-      title: "cabinet",
-      name: "Tủ",
-      img: product,
-    },
-    {
-      id: 3,
-      title: "shoescabinet",
-      name: "Tủ giày",
-      img: product,
-    },
-  ];
   return (
     <>
       <section className="section-category">
@@ -120,7 +40,7 @@ const Home = () => {
           <h2 className="title-h2">
             <strong>Danh mục </strong>nổi bật
           </h2>
-          <ListCategory data={listCategory.slice(0, 3)} />
+          <ListCategory data={categoriesTrending?.slice(0, 3)} />
         </div>
       </section>
       <section className="section-brand">
@@ -128,7 +48,7 @@ const Home = () => {
           <h2 className="title-h2">
             <strong>Thương hiệu </strong>nổi bật
           </h2>
-          <ListBrand data={listBrand.slice(0, 4)} />
+          <ListBrand data={brandFeatured?.slice(0, 4)} />
         </div>
       </section>
       <section className="section-notification">
@@ -152,7 +72,7 @@ const Home = () => {
           <h2 className="title-h2">
             <strong>Sản phẩm </strong>mới nhất
           </h2>
-          <ListProductNew data={listProduct.slice(0, 4)} />
+          <ListProductNew data={listProductsNew} />
         </div>
       </section>
       <Contact />

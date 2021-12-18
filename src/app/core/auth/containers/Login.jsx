@@ -58,7 +58,7 @@ const Login = () => {
     {
       id: "email",
       type: "text",
-      label: "Email *",
+      label: "Email",
       className: "form-control",
       validate: register("email", { ...validateEmail }),
       errors: errors.email,
@@ -67,9 +67,11 @@ const Login = () => {
     {
       id: "password",
       type: "password",
-      label: "Mật khẩu *",
+      label: "Mật khẩu",
       className: "form-control",
-      validate: register("password"),
+      validate: register("password", {
+        required: "Bạn phải nhập mật khẩu",
+      }),
       errors: errors.password,
       para: "",
     },
@@ -107,7 +109,7 @@ const Login = () => {
               Đăng nhập
             </button>
           </form>
-          <Link to="/auth/forgot" className="btn btn-outline">
+          <Link to="/auth/forgot-password" className="btn btn-outline">
             Quên mật khẩu
           </Link>
           <Link to="/auth/register" className="btn btn-outline">

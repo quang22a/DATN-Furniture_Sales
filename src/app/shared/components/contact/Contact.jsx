@@ -1,25 +1,51 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Input } from "../partials/Input";
 import { useForm } from "react-hook-form";
 import { validateEmail } from "../../validate";
 import img from "../../../../assets/images/sectioncontact.jpg";
+import { addContact } from "../../../pages/contact/stores/action";
+import { contactReducer } from "../../../pages/contact/stores/reducer";
 
 export const Contact = () => {
   const {
     register,
     handleSubmit,
     watch,
+    setValue,
     formState: { errors, isDirty, isValid },
   } = useForm({ mode: "onChange", reValidateMode: "onChange" });
+  const dispatch = useDispatch();
+  const [isSubmit, setIsSubmit] = useState(false);
+
+  const error = useSelector((state) => state.contactReducer.error);
+
   const [msgContact, setMsgContact] = useState("");
   const watchName = watch("name");
   const watchPhoneNumber = watch("phone");
   const watchEmail = watch("email");
 
-  const onSubmitContact = () => {
-    console.log(watchName, watchPhoneNumber, watchEmail, msgContact);
+  const onSubmit = async () => {
+    await dispatch(
+      addContact({
+        name: watchName,
+        phone: watchPhoneNumber,
+        email: watchEmail,
+        msg: msgContact,
+      })
+    );
+    setIsSubmit(true);
   };
+
+  useEffect(() => {
+    if (!error && isSubmit) {
+      setValue("name", "");
+      setValue("phone", "");
+      setValue("email", "");
+      setMsgContact("");
+    }
+  }, [error, isSubmit]);
 
   return (
     <div className="section-contact">
@@ -30,7 +56,7 @@ export const Contact = () => {
               <h3>Bạn cần hỗ trợ?</h3>
               <p>Xin vui lòng để lại yêu cầu hỗ trợ của bạn.</p>
             </div>
-            <form className="form-contact">
+            <form className="form-contact" onSubmit={handleSubmit(onSubmit)}>
               <Input
                 id="name"
                 name="name"
@@ -74,12 +100,9 @@ export const Contact = () => {
                 }}
               ></textarea>
               <button
-                type="button"
+                type="submit"
                 className="btn btn-contact"
                 disabled={!isDirty || !isValid}
-                onClick={() => {
-                  onSubmitContact();
-                }}
               >
                 Gửi yêu cầu
               </button>
