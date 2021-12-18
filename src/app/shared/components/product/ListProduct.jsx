@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useLocation } from "react-router";
 
 export const ListProduct = ({ data }) => {
+  const location = useLocation();
   return (
     <>
       <ul className="row product-group">
@@ -8,7 +10,7 @@ export const ListProduct = ({ data }) => {
           ? data.map((item, index) => {
               return (
                 <li className="product-item col-3" key={`cate-${index}`}>
-                  <Link to={`/product/${item.id}}`}>
+                  <Link to={`/products/${item.id}}`}>
                     <div className="product-item-description">
                       <div className="product-img">
                         <img src={item?.img} alt={item?.name} />
@@ -21,6 +23,13 @@ export const ListProduct = ({ data }) => {
                       </div>
                     </div>
                   </Link>
+                  {location.pathname.indexOf("/products") !== -1 ? (
+                    <button className="btn btn-primary btn-add-cart">
+                      Thêm vào giỏ hàng
+                    </button>
+                  ) : (
+                    ""
+                  )}
                 </li>
               );
             })

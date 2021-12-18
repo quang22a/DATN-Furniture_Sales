@@ -7,6 +7,7 @@
   border: 0;
   cursor: pointer;
   margin-left: 0;
+  text-transform: uppercase;
   &.btn-outline {
     background-color: transparent !important;
     font-size: map-get($font-size, m);
@@ -16,7 +17,7 @@
     background-color: map-get($color, primary);
     color: map-get($color, white);
     &:hover {
-      background-color: rgba(0, 123, 255, 0.8);
+      background-color: #dda800;
     }
     &:disabled,
     &[disabled] {
@@ -25,7 +26,7 @@
     }
   }
   &.btn-secondary {
-    background-color: map-get($color, secondary);
+    background-color: transparent;
     color: map-get($color, text);
   }
   &.active {
@@ -36,5 +37,9 @@
   &[disabled] {
     background-color: map-get($color, btn-disable) !important;
     color: gray !important;
+  }
+  &.btn-black {
+    background-color: black;
+    color: white;
   }
 }
