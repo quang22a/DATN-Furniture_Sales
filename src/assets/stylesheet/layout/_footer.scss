@@ -1,0 +1,86 @@
+.page-footer {
+  .top-footer {
+    padding: 50px 0;
+    background-color: map-get($color, footer);
+    color: map-get($color, white);
+    .row {
+      display: flex;
+    }
+    .logo {
+      font-size: 22px;
+      font-weight: bold;
+      color: map-get($color, primary);
+    }
+    .follow {
+      padding-top: 20px;
+      p {
+        padding-bottom: 20px;
+        font-size: 18px;
+        color: map-get($color, primary);
+        font-weight: 500;
+      }
+      .app {
+        a {
+          color: white;
+          font-size: 14px;
+          &:hover {
+            color: map-get($color, primary);
+          }
+        }
+      }
+    }
+    .title-footer {
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+      display: inline-block;
+      font-size: 20px;
+      border-bottom: 3px solid white;
+      color: map-get($color, primary);
+      font-weight: 600;
+    }
+    .list-about {
+      .item {
+        padding-bottom: 10px;
+        a {
+          color: white;
+          &:hover {
+            color: map-get($color, primary);
+          }
+        }
+        &.space {
+          padding-top: 20px;
+        }
+      }
+    }
+    .des {
+      padding-bottom: 20px;
+      line-height: 1.2;
+    }
+    .form-newsletter {
+      display: flex;
+      .form-group {
+        display: inline;
+        .form-control {
+          background-color: rgba(255, 255, 255, 0.2);
+          color: white;
+          &::placeholder {
+            color: white;
+          }
+        }
+      }
+      .btn-contact {
+        float: right;
+        text-transform: uppercase;
+        background-color: black;
+        color: white;
+        font-size: 14px;
+      }
+    }
+  }
+  .bottom-footer {
+    padding: 22px 0;
+    text-align: center;
+    background-color: map-get($color, primary);
+    color: map-get($color, white);
+  }
+}
