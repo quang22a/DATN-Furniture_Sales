@@ -126,8 +126,8 @@ const Payment = () => {
     }
     console.log(dataSubmit);
     // await dispatch(createBill(dataSubmit));
-    const socket = io.connect("https://datn-be.herokuapp.com");
-    // const socket = io.connect("http://localhost:8000");
+    // const socket = io.connect("https://datn-be.herokuapp.com");
+    const socket = io.connect("http://localhost:8000");
     socket.on("connect", () => {
       socket.emit("client-create-bill", dataSubmit);
     });

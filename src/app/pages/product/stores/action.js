@@ -81,6 +81,26 @@ export const getListProduct =
     }
   };
 
+export const getListProductRs = () => async (dispatch) => {
+  try {
+    const response = await http.get([`${ENDPOINT.product.list}-rs`]);
+    dispatch({
+      type: types.GET_LIST_PRODUCT_RS_SUCCESS,
+      payload: response,
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: types.GET_LIST_PRODUCT_RS_FAIL,
+      payload: {
+        error: {
+          title: error.name,
+          content: error?.response?.data?.msg || error?.msg,
+        },
+      },
+    });
+  }
+}
 export const getDetailProduct = (id) => async (dispatch) => {
   try {
     const response = await http.get([ENDPOINT.product.list, id]);

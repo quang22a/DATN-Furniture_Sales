@@ -12,6 +12,7 @@ import {
   getListCategory,
   getListBrand,
 } from "../stores/action";
+import ProductRs from '../components/ProductRs';
 
 const ListProductRenderer = PageRenderer(ListProduct);
 
@@ -129,6 +130,7 @@ const ProductList = () => {
             />
           </div>
         </form>
+        <ProductRs />
       </div>
     </section>
   );

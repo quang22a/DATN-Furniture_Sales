@@ -33,17 +33,20 @@ const ProductBill = () => {
     dispatch(getDetailBill(id));
     dispatch(getProductOfBill(id));
   }, []);
-  console.log(listProduct);
 
-  const sendComment = async (productId) => {
+  const sendComment = async (productInfo) => {
+    console.log('123: ', profileUser);
+    console.log('456: ', productInfo)
     const data = {
       customerId: profileUser._id,
       customerInfo: {
         name: profileUser.name,
       },
-      productId,
+      productId: productInfo.productId,
       rating: parseInt(rating),
       comment: comment,
+      customerIdRating: profileUser.idRating,
+      productIdRating: productInfo.product[0].idRating,
     };
     await dispatch(addRating(data));
     setRating(0);
@@ -160,7 +163,7 @@ const ProductBill = () => {
                     />
                     <button
                       className="btn btn-black"
-                      onClick={() => sendComment(item.productId)}
+                      onClick={() => sendComment(item)}
                     >
                       Gửi
                     </button>

@@ -25,8 +25,7 @@ export const ListProduct = ({ data }) => {
     <>
       <ul className="row product-group">
         {data && Array.isArray(data) && data.length > 0
-          ? data.map((item, index) => {
-              return (
+          ? data.map((item, index) => (
                 <li className="product-item col-3" key={`cate-${index}`}>
                   <Link to={`/products/${item._id}`}>
                     <div className="product-item-description">
@@ -57,8 +56,8 @@ export const ListProduct = ({ data }) => {
                     </button>
                   )}
                 </li>
-              );
-            })
+              )
+            )
           : ""}
       </ul>
     </>

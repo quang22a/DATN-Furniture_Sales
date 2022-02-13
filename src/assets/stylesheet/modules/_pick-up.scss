@@ -1,0 +1,71 @@
+.slide-wrap {
+  padding: 50px 35px;
+  border-radius: 10px;
+  box-shadow: 0 12px 33px 0 rgba(0, 0, 0, 0.1);
+  text-align: center;
+  .slick-slider,
+  .slick-list {
+    position: relative;
+    display: block;
+  }
+  .slick-list {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+}
+.slick-track {
+  position: relative;
+  top: 0;
+  left: 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.slick-slide {
+  float: left;
+}
+.slick-prev,
+.slick-next {
+  height: 30px;
+  width: 30px;
+  position: absolute;
+  display: block;
+  font-size: 0;
+  cursor: pointer;
+  top: 50%;
+  transform: translate(0, -50%);
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  z-index: 10;
+  background-color: black;
+  &:hover {
+    background-color: #3c414e;
+  }
+  &::before {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    font-size: 16px;
+    color: white;
+    top: 5px;
+    right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.slick-prev {
+  left: -10px;
+  &::before {
+    content: "<";
+  }
+}
+.slick-next {
+  right: -8px;
+  &::before {
+    content: ">";
+  }
+}
