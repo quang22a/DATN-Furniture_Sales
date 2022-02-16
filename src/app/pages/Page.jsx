@@ -14,8 +14,8 @@ const Page = () => {
       dispatch(getProfile());
     }
   }, []);
-  // const socket = io.connect("https://datn-be.herokuapp.com");
-  const socket = io.connect("http://localhost:8000");
+  const socket = io.connect("https://datn-be.herokuapp.com");
+  // const socket = io.connect("http://localhost:8000");
 
   useEffect(() => {
     socket.on("connect", (data) => {
