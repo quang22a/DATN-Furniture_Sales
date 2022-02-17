@@ -11,7 +11,7 @@ export const ListCategory = ({ data }) => {
                   className={`category-item col-4 ${index === 1 ? "up" : ""}`}
                   key={`cate-${index}`}
                 >
-                  <Link to={`/product?category=${item?.title?.toLowerCase()}`}>
+                  <Link to={`/products?category=${item?._id?.toLowerCase()}`}>
                     <div className="cate-item-description">
                       <div className="cate-img">
                         <img src={item?.image} alt={item?.name} />

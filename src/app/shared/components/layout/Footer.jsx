@@ -52,16 +52,6 @@ export const Footer = () => {
                     Hãy để lại email của bạn để nhận được những ý tưởng trang
                     trí mới và những thông tin, ưu đãi từ Luxury House
                   </p>
-                  <form className="form-newsletter">
-                    <Input
-                      id="email-footer"
-                      placeholder="Nhập email của bạn"
-                      className="form-control"
-                    />
-                    <button type="button" className="btn btn-contact">
-                      Đăng ký
-                    </button>
-                  </form>
                 </div>
               </div>
             </div>

@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router";
 
+import qs from 'qs';
+
 import Pagination from "@mui/material/Pagination";
 import PageRenderer from "../../../shared/components/modules/PageRenderer";
 import { ListProduct } from "../../../shared/components/product/ListProduct";
@@ -13,12 +15,17 @@ import {
   getListBrand,
 } from "../stores/action";
 import ProductRs from '../components/ProductRs';
+import { setTextSearch } from "../../../stores/search/action";
 
 const ListProductRenderer = PageRenderer(ListProduct);
 
 const ProductList = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const location = useLocation();
+  const query = location.search;
+  const objQuery = new URLSearchParams(query);
+
   const [sortPriceState, setSortPrice] = useState("asc");
   const [searchCategory, setSearchCategory] = useState(null);
   const [searchBrand, setSearchBrand] = useState(null);
@@ -34,13 +41,17 @@ const ProductList = () => {
   useEffect(() => {
     dispatch(getListCategory());
     dispatch(getListBrand());
+    setSortPrice(objQuery.get('sortPrice'));
+    setSearchCategory(objQuery.get('category'));
+    setSearchBrand(objQuery.get('brand'));
+    // dispatch(setTextSearch(objQuery.get('search')));
   }, []);
 
   useEffect(() => {
-    setPage(1);
     dispatch(
       getListProduct(searchCategory, searchBrand, sortPriceState, 1, 12, search)
     );
+    updateURL(1);
   }, [sortPriceState, searchCategory, searchBrand, search]);
 
   useEffect(() => {
@@ -68,46 +79,61 @@ const ProductList = () => {
     setSearchBrand(e.target.value);
   };
 
+  const updateURL = (pageUpdate) => {
+    const newUrl = qs.stringify(
+      {
+        category: searchCategory || null,
+        brand: searchBrand || null,
+        sortPrice: sortPriceState === 'desc' ? sortPriceState : null,
+      },
+      { encode: false, skipNulls: true, arrayFormat: 'comma', addQueryPrefix: true },
+    )
+    navigate(`..${newUrl}`)
+  }
+
   return (
     <section className="section-product-list">
       <div className="container">
         <form className="form-product-list">
           <div className="search-field">
-            <div className="sort">
-              <p>Danh mục</p>
-              <select
-                className="sort-list"
-                onChange={(e) => changeSearchCategory(e)}
-              >
-                <option value="">Chọn danh mục</option>
-                {listCategories &&
-                  listCategories.map((item, index) => (
+            {
+              listCategories &&  <div className="sort">
+                <p>Danh mục</p>
+                <select
+                  className="sort-list"
+                  defaultValue={objQuery.get('category') && listCategories ? listCategories.find((item) => item._id === objQuery.get('category'))?._id : ''}
+                  onChange={(e) => changeSearchCategory(e)}
+                >
+                  <option value="">Chọn danh mục</option>
+                  {listCategories.map((item, index) => (
                     <option value={item._id} key={`category-${index}`}>
                       {item.name}
                     </option>
                   ))}
-              </select>
-            </div>
-            <div className="sort">
-              <p>Thương hiệu</p>
-              <select
-                className="sort-list"
-                onChange={(e) => changeSearchBrand(e)}
-              >
-                <option value="">Chọn thương hiệu</option>
-                {listBrands &&
-                  listBrands.map((item, index) => (
-                    <option value={item._id} key={`brand-${index}`}>
-                      {item.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
+                </select>
+              </div>
+            }
+            {listBrands && <div className="sort">
+                <p>Thương hiệu</p>
+                <select
+                  className="sort-list"
+                  defaultValue={objQuery.get('brand') && listBrands ? listBrands.find((item) => item._id === objQuery.get('brand'))?._id : ''}
+                  onChange={(e) => changeSearchBrand(e)}
+                >
+                  <option value="">Chọn thương hiệu</option>
+                  {listBrands.map((item, index) => (
+                      <option value={item._id} key={`brand-${index}`}>
+                        {item.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            }
             <div className="sort">
               <p>Giá</p>
               <select
                 className="sort-list"
-                defaultValue="asc"
+                defaultValue={objQuery.get('sortPrice')}
                 onChange={(e) => searchPrice(e)}
               >
                 <option value="asc">Giá từ thấp đến cao</option>

@@ -72,6 +72,7 @@ const Payment = () => {
         // Finalize the transaction after payer approval
         onApprove: function (data, actions) {
           return actions.order.capture().then(function (orderData) {
+            console.log("paypal")
             onSubmit('Paypal');
             var transaction = orderData.purchase_units[0].payments.captures[0];
             alert(
@@ -84,7 +85,7 @@ const Payment = () => {
           });
         },
         onError: (err) => {
-          console.log(err);
+          // console.log(err);
         },
       })
       .render(paypal.current);
@@ -126,8 +127,8 @@ const Payment = () => {
     }
     console.log(dataSubmit);
     // await dispatch(createBill(dataSubmit));
-    const socket = io.connect("https://datn-be.herokuapp.com");
-    // const socket = io.connect("http://localhost:8000");
+    // const socket = io.connect("https://datn-be.herokuapp.com");
+    const socket = io.connect("http://localhost:8000");
     socket.on("connect", () => {
       socket.emit("client-create-bill", dataSubmit);
     });

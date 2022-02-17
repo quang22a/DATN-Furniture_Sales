@@ -63,6 +63,7 @@ export const getListProduct =
         url = url + "&search=" + search;
       }
       const response = await http.get([url + "&status=" + true]);
+      console.log('res :', response.data)
       dispatch({
         type: types.GET_LIST_PRODUCT_SUCCESS,
         payload: response,

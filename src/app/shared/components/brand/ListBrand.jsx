@@ -11,7 +11,7 @@ export const ListBrand = ({ data }) => {
                   className={`brand-item col-3 ${index === 1 ? "up" : ""}`}
                   key={`brand-${index}`}
                 >
-                  <Link to={`/product?brands=${item?.title}`}>
+                  <Link to={`/products?brand=${item?._id?.toLowerCase()}`}>
                     <div className="brand-item-description">
                       <div className="product-img">
                         <img src={item?.image} alt={item?.name} />

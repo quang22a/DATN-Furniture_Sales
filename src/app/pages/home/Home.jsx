@@ -4,6 +4,7 @@ import {
   getCategoriesTrending,
   getBrandsFeatured,
   getListProductNew,
+  getNoti
 } from "./stores/action";
 
 import { ListCategory } from "../../shared/components/category/ListCategory";
@@ -26,11 +27,15 @@ const Home = () => {
   const brandFeatured = useSelector(
     (state) => state.homeReducer.dataBrandFeatured
   );
+  const noti = useSelector(
+    (state) => state.homeReducer.dataNoti
+  )
 
   useEffect(() => {
     dispatch(getCategoriesTrending());
     dispatch(getBrandsFeatured());
     dispatch(getListProductNew());
+    dispatch(getNoti());
   }, []);
 
   return (
@@ -51,22 +56,25 @@ const Home = () => {
           <ListBrand data={brandFeatured?.slice(0, 4)} />
         </div>
       </section>
-      <section className="section-notification">
-        <div className="container">
-          <h2 className="title-h2">Thông báo mới</h2>
-          <div className="notification">
-            <div className="msg-notification">
-              <p>Sản phẩm sắp được khuyến mãi</p>
-            </div>
-            <div className="img-notification">
-              <img
-                src="https://nhaxinh.com/wp-content/uploads/2021/11/nha-xinh-phong-an-miami-bac-au-1200x800.jpg"
-                alt="Khuyến mãi"
-              />
+      {
+        noti && <section className="section-notification">
+          <div className="container">
+            <h2 className="title-h2">Thông báo mới nhất</h2>
+            <div className="notification">
+              <div className="msg-notification">
+                <p className="title-noti">{noti.title}</p>
+                <p className="content-noti">{noti.content}</p>
+              </div>
+              <div className="img-notification">
+                <img
+                  src={noti.image}
+                  alt="Thông báo mới"
+                />
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      }
       <section className="section-product">
         <div className="container">
           <h2 className="title-h2">

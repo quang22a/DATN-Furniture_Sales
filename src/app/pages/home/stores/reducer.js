@@ -10,10 +10,26 @@ const intialState = {
   dataProductsNew: null,
   errorProductsNew: null,
   msgProductNew: null,
+  dataNoti: null,
+  errorNoti: null,
+  msgNoti: null,
 };
 
 export const homeReducer = (state = intialState, action) => {
   switch (action.type) {
+    case types.GET_NOTIFICATION_SUCCESS:
+      return {
+        ...state,
+        dataNoti: action.payload.data,
+        errorNoti: false,
+        msgNoti: null,
+      };
+    case types.GET_NOTIFICATION_FAIL:
+      return {
+        ...state,
+        errorNoti: true,
+        msgNoti: action.payload,
+      };
     case types.GET_CATEGORY_TRENDING_SUCCESS:
       return {
         ...state,

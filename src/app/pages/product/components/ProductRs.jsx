@@ -29,7 +29,6 @@ const ProductRs = () => {
   }, []);
 
   useEffect(() => {
-    console.log(listProductRs)
     setSettings({
       ...settings,
       infinite: listProductRs && listProductRs.length > 4 ? true : false,

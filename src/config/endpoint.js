@@ -21,6 +21,7 @@ const RESOURCES = {
     list: "bills",
   },
   contact: "contact",
+  notification: "notifications",
 };
 
 export const ENDPOINT = {
@@ -56,4 +57,5 @@ export const ENDPOINT = {
     list: `${RESOURCES.bill.list}`,
   },
   contact: `${RESOURCES.contact}`,
+  notification: `${RESOURCES.notification}`,
 };
