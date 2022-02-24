@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
@@ -6,14 +7,13 @@ import { useNavigate } from "react-router";
 import { io } from "socket.io-client";
 
 import { Input } from "../../shared/components/partials/Input";
-import { createBill } from "./stores/action";
 import { formatPrice } from "../../shared/helpers/utils/formatPrice";
 import { setModal } from "../../stores/modal/action";
 import { clearCart } from "../cart/stores/action";
-import PayPal from "./components/PayPal";
+
+const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM});
 
 const Payment = () => {
-  const paypal = useRef();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const {
@@ -26,7 +26,6 @@ const Payment = () => {
     mode: "onChange",
     reValidateMode: "onChange",
   });
-  const [paymentMethod, setPaymentMethod] = useState("Paypal");
   const [additional, setAdditional] = useState("");
   const [isSubmit, setIsSubmit] = useState(false);
   const listProduct = useSelector((state) => state.cartReducer.data);
@@ -43,53 +42,16 @@ const Payment = () => {
         (
           (currentItem.price * (100 - (currentItem.discount || 0))) /
           100
-        ).toFixed(2)
+        ).toFixed(0)
       ) *
         currentItem.quantity
     );
   }, 0);
-
+  const totalPriceUsd = totalPrice / 23000;
   const watchName = watch("name");
   const watchEmail = watch("email");
   const watchPhone = watch("phone");
   const watchAdress = watch("address");
-
-  useEffect(() => {
-    window.paypal
-      .Buttons({
-        createOrder: function (data, actions) {
-          return actions.order.create({
-            purchase_units: [
-              {
-                amount: {
-                  currency_code: "USD",
-                  value: "1", // Can reference variables or functions. Example: `value: document.getElementById('...').value`
-                },
-              },
-            ],
-          });
-        },
-        // Finalize the transaction after payer approval
-        onApprove: function (data, actions) {
-          return actions.order.capture().then(function (orderData) {
-            console.log("paypal")
-            onSubmit('Paypal');
-            var transaction = orderData.purchase_units[0].payments.captures[0];
-            alert(
-              "Transaction " +
-                transaction.status +
-                ": " +
-                transaction.id +
-                "\n\nSee console for all available details"
-            );
-          });
-        },
-        onError: (err) => {
-          // console.log(err);
-        },
-      })
-      .render(paypal.current);
-  }, []);
 
   useEffect(() => {
     setValue("name", profileUser?.name);
@@ -149,6 +111,27 @@ const Payment = () => {
     }
     setIsSubmit(false);
   }, [isSubmit]);
+
+  const createOrder = (data, actions) => {
+    return actions.order.create({
+      purchase_units: [
+        {
+          amount: {
+            currency_code: "USD",
+            value: totalPriceUsd.toFixed(0), // Can reference variables or functions. Example: `value: document.getElementById('...').value`
+          },
+        },
+      ],
+    });
+  }
+  const onApprove = (data, actions) => {
+    return actions.order.capture().then(function (orderData) {
+      onSubmit('Paypal');
+      alert(
+        "Thanh toán thành công"
+      );
+    });
+  }
 
   return (
     <section className="section-payment">
@@ -228,42 +211,6 @@ const Payment = () => {
                 onChange={(e) => setAdditional(e.target.value)}
               />
             </div>
-            {/* <p className="title-info-payment text-uppercase">
-              Phương thức thanh toán
-            </p>
-            <div className="payment-method">
-              <div
-                className={`payment-option ${
-                  paymentMethod === "Paypal" ? "check" : ""
-                }`}
-                onClick={() => setPaymentMethod("Paypal")}
-              >
-                <i className="fas fa-money-check"></i>
-                <p>Chuyển khoản ngân hàng</p>
-              </div>
-              <div
-                className={`payment-option ${
-                  paymentMethod === "Cash" ? "check" : ""
-                }`}
-                onClick={() => setPaymentMethod("Cash")}
-              >
-                <i className="fas fa-wallet"></i>
-                <p>Thanh toán khi nhận hàng</p>
-              </div>
-            </div> */}
-            <div className="bank-number">
-              <p className="title-info-payment text-uppercase">
-                Tài khoản ngân hàng
-              </p>
-              <p className="info-bank">
-                Số tài khoản: <span>0123456789</span>
-              </p>
-              <p className="info-bank">
-                Tên chủ tài khoản:{" "}
-                <span className="text-uppercase">Tran Minh Quang</span>
-              </p>
-              <p className="info-bank text-uppercase">Ngân hàng Vietcombank</p>
-            </div>
           </div>
           <div className="col-5">
             <div className="summary-order">
@@ -302,9 +249,11 @@ const Payment = () => {
                   ))}
                 </ul>
                 <div>
-                  <div ref={paypal}></div>
+                  <PayPalButton 
+                    createOrder={(data, actions) => createOrder(data, actions)}
+                    onApprove={(data, actions) => onApprove(data, actions)}
+                  />
                 </div>
-                  {/* {paymentMethod === 0 ? "Thanh toán Paypal" : "Đặt mua"} */}
                 <button type="submit" className="btn btn-primary">
                   Thanh toán bằng tiền mặt
                 </button>

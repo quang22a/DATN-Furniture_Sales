@@ -1,25 +1,8 @@
 import { Link } from "react-router-dom";
-import { useLocation } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
 
-import { addToCartAction } from "../../../pages/cart/stores/action";
 import { formatPrice } from "../../helpers/utils/formatPrice";
 
 export const ListProduct = ({ data }) => {
-  const location = useLocation();
-  const dispatch = useDispatch();
-  const cart = useSelector((state) => state.cartReducer.data);
-
-  const addToCart = (e, product) => {
-    let oldQuantity = 0;
-    for (let item of cart) {
-      if (item._id === product._id) {
-        oldQuantity = item.quantity;
-      }
-    }
-    dispatch(addToCartAction(product, oldQuantity + 1));
-    e.stopPropagation();
-  };
 
   return (
     <>
@@ -47,14 +30,6 @@ export const ListProduct = ({ data }) => {
                       </div>
                     </div>
                   </Link>
-                  {location.pathname.indexOf("/products") !== -1 && (
-                    <button
-                      className="btn btn-primary btn-add-cart"
-                      onClick={(e) => addToCart(e, item)}
-                    >
-                      Thêm vào giỏ hàng
-                    </button>
-                  )}
                 </li>
               )
             )

@@ -18,14 +18,12 @@ const ProductDetail = () => {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [checkMoreInfo, setCheckMoreInfo] = useState(0);
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState("");
 
   const productDetail = useSelector((state) => state.productReducer.dataDetail);
   const listCategories = useSelector(
     (state) => state.productReducer.listCategories
   );
-  const profileUser = useSelector((state) => state.profileReducer.dataProfile);
+
   const listBrands = useSelector((state) => state.productReducer.listBrands);
   const cart = useSelector((state) => state.cartReducer.data);
   const listRatings = useSelector((state) => state.productReducer.listRatings);
@@ -39,22 +37,6 @@ const ProductDetail = () => {
 
   const token = localStorage.getItem("token");
 
-  const sendComment = async () => {
-    const data = {
-      customerId: profileUser._id,
-      customerInfo: {
-        name: profileUser.name,
-      },
-      productId: productDetail._id,
-      rating: parseInt(rating),
-      comment: comment,
-    };
-    await dispatch(addRating(data));
-    dispatch(getRatings(id, 1));
-    setRating(0);
-    setComment("");
-  };
-
   const addToCart = () => {
     let oldQuantity = 0;
     for (let item of cart) {
@@ -64,7 +46,7 @@ const ProductDetail = () => {
     }
     dispatch(addToCartAction(productDetail, oldQuantity + quantity));
   };
-
+  console.log(productDetail)
   return (
     <section className="section-product-detail">
       <div className="container">
@@ -104,43 +86,48 @@ const ProductDetail = () => {
               <div className="product-attribute">
                 <p>Số lượng:</p>
                 <span>{productDetail.quantity}</span>
+                {
+                  productDetail.quantity > 0 ? '' : <span className="sold-out"> (Đã hết hàng)</span>
+                }
+                
               </div>
-              <div className="form-add-to-cart">
-                <div className="quantity-product">
-                  <button
-                    type="button"
-                    className="quantity"
-                    onClick={() => setQuantity(quantity - 1)}
-                    disabled={quantity === 1 ? true : false}
-                  >
-                    -
-                  </button>
-                  <input
-                    name="quantity_product"
-                    className="quantity"
-                    type="number"
-                    min="1"
-                    value={quantity}
-                    onChange={() => {}}
-                  />
-                  <button
-                    type="button"
-                    className="quantity"
-                    onClick={() => setQuantity(quantity + 1)}
-                    disabled={quantity >= productDetail.quantity ? true : false}
-                  >
-                    +
-                  </button>
-                </div>
-                {token && (
+              {
+                token && productDetail.quantity > 0 && <div className="form-add-to-cart">
+                  <div className="quantity-product">
+                    <button
+                      type="button"
+                      className="quantity"
+                      onClick={() => setQuantity(quantity - 1)}
+                      disabled={quantity === 1 ? true : false}
+                    >
+                      -
+                    </button>
+                    <input
+                      name="quantity_product"
+                      className="quantity"
+                      type="number"
+                      min="1"
+                      value={quantity}
+                      onChange={() => {}}
+                    />
+                    <button
+                      type="button"
+                      className="quantity"
+                      onClick={() => setQuantity(quantity + 1)}
+                      disabled={quantity >= productDetail.quantity ? true : false}
+                    >
+                      +
+                    </button>
+                  </div>
                   <button
                     className="btn btn-primary"
                     onClick={() => addToCart()}
                   >
                     Thêm vào giỏ
                   </button>
-                )}
-              </div>
+                </div>
+              }
+              
               <div className="more-info">
                 <ul className="list-option">
                   <li className={checkMoreInfo === 0 ? "active" : ""}>
@@ -193,8 +180,7 @@ const ProductDetail = () => {
                       kỹ thuật trong quá trình sản xuất hay lắp đặt.
                     </p>
                     <p>
-                      Quý khách không nên tự sửa chữa mà hãy báo ngay cho Nhà
-                      Xinh qua hotline: 1234 5678.
+                      Quý khách không nên tự sửa chữa mà hãy báo ngay cho Luxuru House qua hotline: 1234 5678.
                     </p>
                   </div>
                   <div className={checkMoreInfo !== 3 ? "hide" : ""}>
