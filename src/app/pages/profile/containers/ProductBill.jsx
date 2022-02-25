@@ -26,8 +26,6 @@ const ProductBill = () => {
     (state) => state.profileReducer.listProductBill
   );
 
-  console.log(listProduct)
-
   useEffect(() => {
     dispatch(getDetailBill(id));
     dispatch(getProductOfBill(id));
