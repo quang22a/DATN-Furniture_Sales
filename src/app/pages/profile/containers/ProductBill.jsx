@@ -35,8 +35,6 @@ const ProductBill = () => {
   }, []);
 
   const sendComment = async (productInfo) => {
-    console.log('123: ', profileUser);
-    console.log('456: ', productInfo)
     const data = {
       customerId: profileUser._id,
       customerInfo: {
