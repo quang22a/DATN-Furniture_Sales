@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 
-import { setModal } from "../../../stores/modal/action";
 import { getProductOfBill, getDetailBill } from "../stores/action";
 import { formatPrice } from "../../../shared/helpers/utils/formatPrice";
 import { addRating } from "../../product/stores/action";
@@ -16,7 +16,6 @@ const status = {
 const ProductBill = () => {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const [dataProducts, setDataProducts] = useState();
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
   const [indexShowRating, setIndexShowRating] = useState(null);
@@ -27,7 +26,7 @@ const ProductBill = () => {
     (state) => state.profileReducer.listProductBill
   );
 
-  const label = { inputProps: { "aria-label": "Switch demo" } };
+  console.log(listProduct)
 
   useEffect(() => {
     dispatch(getDetailBill(id));
@@ -35,8 +34,6 @@ const ProductBill = () => {
   }, []);
 
   const sendComment = async (productInfo) => {
-    console.log('123: ', profileUser);
-    console.log('456: ', productInfo)
     const data = {
       customerId: profileUser._id,
       customerInfo: {
@@ -111,19 +108,21 @@ const ProductBill = () => {
             {listProduct?.map((item, index) => (
               <li className="item-cart" key={index}>
                 <div className="item">
-                  <div className="img-product-cart">
-                    <img
-                      src={item.product[0].image}
-                      alt={item.product[0].name}
-                    />
-                  </div>
-                  <div className="info-product-cart">
-                    <p className="name-product">{item.product[0].name}</p>
-                    <span className="quantity-product">x{item.quantity}</span>
-                    <span className="price">
-                      {formatPrice(item.product[0].price || 0)}
-                    </span>
-                  </div>
+                  <Link to={`/products/${item.productId}`}>
+                    <div className="img-product-cart">
+                      <img
+                        src={item.product[0].image}
+                        alt={item.product.productName}
+                      />
+                    </div>
+                    <div className="info-product-cart">
+                      <p className="name-product">{item.productName}</p>
+                      <span className="quantity-product">x{item.quantity}</span>
+                      <span className="price">
+                        {formatPrice(item.price || 0)}
+                      </span>
+                    </div>
+                  </Link>
                   {
                     status[bill?.status] === "Đã hoàn thành" ? (
                       <button

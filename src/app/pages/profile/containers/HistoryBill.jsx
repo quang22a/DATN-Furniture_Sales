@@ -27,9 +27,6 @@ const HistoryBill = () => {
   useEffect(() => {
     dispatch(getHistoryBill());
   }, []);
-  useEffect(() => {
-    console.log(bill);
-  }, [bill]);
 
   const columns = [
     {

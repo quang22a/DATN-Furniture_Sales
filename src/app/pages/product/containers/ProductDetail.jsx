@@ -46,7 +46,7 @@ const ProductDetail = () => {
     }
     dispatch(addToCartAction(productDetail, oldQuantity + quantity));
   };
-  console.log(productDetail)
+
   return (
     <section className="section-product-detail">
       <div className="container">
@@ -158,7 +158,7 @@ const ProductDetail = () => {
                     <p>{productDetail.description}</p>
                   </div>
                   <div className={checkMoreInfo !== 1 ? "hide" : ""}>
-                    {listRatings && listRatings.result?.length ? (
+                    {listRatings && listRatings.length ? (
                       ""
                     ) : (
                       <p>Chưa có bài đánh giá</p>

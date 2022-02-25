@@ -118,6 +118,10 @@
       .item {
         position: relative;
         display: flex;
+        a {
+          position: relative;
+          display: flex;
+        }
       }
       .img-product-cart {
         width: 30%;

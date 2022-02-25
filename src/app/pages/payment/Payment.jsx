@@ -65,7 +65,7 @@ const Payment = () => {
       return accumulator + currentItem.quantity;
     }, 0);
     const dataSubmit = {
-      customerId: profileUser?.accountId,
+      customerId: profileUser?._id,
       name: watchName || profileUser?.name,
       email: watchEmail || profileUser?.email,
       phone: watchPhone || profileUser?.phone,
@@ -89,8 +89,8 @@ const Payment = () => {
     }
     console.log(dataSubmit);
     // await dispatch(createBill(dataSubmit));
-    // const socket = io.connect("https://datn-be.herokuapp.com");
-    const socket = io.connect("http://localhost:8000");
+    const socket = io.connect("https://datn-be.herokuapp.com");
+    // const socket = io.connect("http://localhost:8000");
     socket.on("connect", () => {
       socket.emit("client-create-bill", dataSubmit);
     });
