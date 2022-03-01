@@ -33,6 +33,16 @@
       font-size: 18px;
       font-weight: 500;
     }
+    &.form-email {
+      margin-bottom: 20px;
+      p {
+        font-size: 18px;
+        span {
+          float: right;
+          font-weight: bold;
+        }
+      }
+    }
   }
   .action-profile {
     margin-top: 20px;
@@ -179,12 +189,10 @@
 }
 .section-rating {
   margin-bottom: 20px;
-  .fa-star {
+  .icon-star {
     margin-top: 20px;
     margin-bottom: 20px;
-    &.active {
-      color: #e9e50e;
-    }
+    color: #e9e50e;
     &:hover {
       cursor: pointer;
     }

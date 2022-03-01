@@ -25,13 +25,12 @@ const UpdateProfile = () => {
 
   useEffect(() => {
     setValue("name", profileUser?.name);
-    setValue("email", profileUser?.email);
     setValue("phone", profileUser?.phone);
     setValue("address", profileUser?.address);
   }, [profileUser]);
 
   const onSubmit = async (data) => {
-    await dispatch(updateProfile(data));
+    await dispatch(updateProfile({...data, email: profileUser?.email}));
     setIsSubmit(true);
   };
 
@@ -49,6 +48,9 @@ const UpdateProfile = () => {
           <p className="text-uppercase title-profile">
             Cập nhật thông tin cá nhân
           </p>
+          <div className="form-row form-email">
+            <p>Địa chỉ email <span>{profileUser?.email}</span></p>
+          </div>
           <div className="form-row">
             <Input
               type="text"
@@ -60,20 +62,6 @@ const UpdateProfile = () => {
                 required: "Bạn phải nhập họ tên",
               })}
               errors={errors.name}
-              para={""}
-            />
-          </div>
-          <div className="form-row">
-            <Input
-              type="email"
-              className="form-control"
-              label="Địa chỉ email"
-              placeholder={"Email"}
-              id={"email"}
-              validate={register("email", {
-                required: "Bạn phải nhập email",
-              })}
-              errors={errors.email}
               para={""}
             />
           </div>

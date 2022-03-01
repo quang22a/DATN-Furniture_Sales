@@ -34,9 +34,6 @@ const ProductBill = () => {
   const sendComment = async (productInfo) => {
     const data = {
       customerId: profileUser._id,
-      customerInfo: {
-        name: profileUser.name,
-      },
       productId: productInfo.productId,
       rating: parseInt(rating),
       comment: comment,
@@ -125,11 +122,12 @@ const ProductBill = () => {
                     status[bill?.status] === "Đã hoàn thành" ? (
                       <button
                         className="btn btn-black btn-show-rating"
-                        onClick={() =>
+                        onClick={async () => {
+                          await setRating(0);
                           setIndexShowRating(
                             indexShowRating === index ? null : index
                           )
-                        }
+                        }}
                       >
                         Đánh giá
                       </button>
@@ -140,16 +138,16 @@ const ProductBill = () => {
                 {indexShowRating === index && (
                   <div className="section-rating">
                     {[...Array(5)].map((item, index) => (
-                      <i
-                        className={`far fa-star ${
-                          index + 1 <= rating ? "active" : ""
-                        }`}
+                      <i 
+                        class={`material-icons-outlined icon-star`}
                         id={index + 1}
                         key={index}
                         onClick={(e) => {
                           setRating(rating !== e.target.id ? e.target.id : 0);
-                        }}
-                      ></i>
+                        }}>
+                          {index + 1 <= rating ? 'star' : 'star_border'}
+                        
+                      </i>
                     ))}
                     <textarea
                       type="text"

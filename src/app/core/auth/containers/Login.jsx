@@ -17,40 +17,18 @@ const Login = () => {
   } = useForm({ mode: "onChange", reValidateMode: "onChange" });
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [data, setData] = useState({});
-  const [loading, setLoading] = useState(false);
 
   const token = localStorage.getItem("token");
   const error = useSelector((state) => state?.auth?.errorLogin);
   const msg = useSelector((state) => state?.auth?.msg);
 
   const onSubmit = (data) => {
-    if (!loading) {
-      setData(data);
-      setLoading(true);
-    }
+    dispatch(login(data, navigate));
   };
-
-  useEffect(() => {
-    if (loading) {
-      dispatch(login(data));
-    }
-  }, [loading]);
-
-  useEffect(() => {
-    setLoading(false);
-  }, [error]);
 
   useEffect(() => {
     if (token) {
       navigate("/");
-      dispatch(
-        setModal({
-          key: "snapback",
-          title: "",
-          content: "Đăng nhập thành công",
-        })
-      );
     }
   }, [token]);
 
