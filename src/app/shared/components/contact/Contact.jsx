@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { Input } from "../partials/Input";
 import { useForm } from "react-hook-form";
-import { validateEmail } from "../../validate";
+import { validateEmail, validatePhone } from "../../validate";
 import img from "../../../../assets/images/sectioncontact.jpg";
 import { addContact } from "../../../pages/contact/stores/action";
 import { contactReducer } from "../../../pages/contact/stores/reducer";
@@ -72,9 +72,7 @@ export const Contact = () => {
                 id="phone"
                 name="phone"
                 type="text"
-                validate={register("phone", {
-                  required: "Phone Number is required",
-                })}
+                validate={register("phone", { ...validatePhone })}
                 errors={errors.phone}
                 className="form-control phone"
                 placeholder="0123456789"

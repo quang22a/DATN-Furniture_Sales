@@ -50,54 +50,56 @@ const ProductBill = () => {
       <div className="container">
         <p className="title text-uppercase">Thông tin đơn hàng</p>
         <div className="bill">
-          <p className="title-bill">Thông tin khách hàng</p>
-          <div className="bill-info">
-            <span className="left">Tên khách hàng</span>
-            <span className="right">{bill?.name}</span>
-          </div>
-          <div className="bill-info">
-            <span className="left">Số điện thoại</span>
-            <span className="right">{bill?.phone}</span>
-          </div>
-          <div className="bill-info">
-            <span className="left">Địa chỉ email</span>
-            <span className="right">{bill?.email}</span>
-          </div>
-          <div className="bill-info">
-            <span className="left">Địa chỉ</span>
-            <span className="right">{bill?.address}</span>
-          </div>
-          <p className="title-bill">Thông tin đơn hàng</p>
-          <div className="bill-info">
-            <span className="left">Tổng sản phẩm</span>
-            <span className="right">{bill?.totalProduct}</span>
-          </div>
-          <div className="bill-info">
-            <span className="left">Tổng tiền</span>
-            <span className="right">{bill?.totalPrice}</span>
-          </div>
-          <div className="bill-info">
-            <span className="left">Phương thức thanh toán</span>
-            <span className="right">
-              {bill?.paymentMethod === "Paypal" ? "Chuyển khoản" : "Tiền mặt"}
-            </span>
-          </div>
-          {bill?.additional && (
+          <div className="info-customer">
+            <p className="title-bill">Thông tin khách hàng</p>
             <div className="bill-info">
-              <span className="left">Thông tin thêm</span>
-              <span className="right">{bill?.additional}</span>
+              <span className="left">Tên khách hàng</span>
+              <span className="right">{bill?.name}</span>
             </div>
-          )}
+            <div className="bill-info">
+              <span className="left">Số điện thoại</span>
+              <span className="right">{bill?.phone}</span>
+            </div>
+            <div className="bill-info">
+              <span className="left">Địa chỉ email</span>
+              <span className="right">{bill?.email}</span>
+            </div>
+            <div className="bill-info">
+              <span className="left">Địa chỉ</span>
+              <span className="right">{bill?.address}</span>
+            </div>
+            <p className="title-bill">Thông tin đơn hàng</p>
+            <div className="bill-info">
+              <span className="left">Tổng sản phẩm</span>
+              <span className="right">{bill?.totalProduct}</span>
+            </div>
+            <div className="bill-info">
+              <span className="left">Tổng tiền</span>
+              <span className="right">{bill?.totalPrice}</span>
+            </div>
+            <div className="bill-info">
+              <span className="left">Phương thức thanh toán</span>
+              <span className="right">
+                {bill?.paymentMethod === "Paypal" ? "Chuyển khoản" : "Tiền mặt"}
+              </span>
+            </div>
+            {bill?.additional && (
+              <div className="bill-info">
+                <span className="left">Thông tin thêm</span>
+                <span className="right">{bill?.additional}</span>
+              </div>
+            )}
 
-          <div className="bill-info">
-            <span className="left">Trạng thái thanh toán</span>
-            <span className="right">
-              {bill?.paymentStatus ? "Đã thanh toán" : "Chưa thanh toán"}
-            </span>
-          </div>
-          <div className="bill-info">
-            <span className="left">Trạng thái đơn hàng</span>
-            <span className="right">{status[bill?.status]}</span>
+            <div className="bill-info">
+              <span className="left">Trạng thái thanh toán</span>
+              <span className="right">
+                {bill?.paymentStatus ? "Đã thanh toán" : "Chưa thanh toán"}
+              </span>
+            </div>
+            <div className="bill-info">
+              <span className="left">Trạng thái đơn hàng</span>
+              <span className="right">{status[bill?.status]}</span>
+            </div>
           </div>
           <ul className="list-product">
             {listProduct?.map((item, index) => (

@@ -92,9 +92,6 @@
 }
 .section-bill-detail {
   padding: 40px;
-  .container {
-    width: 50%;
-  }
   .title {
     padding-bottom: 20px;
     font-size: 28px;
@@ -102,6 +99,11 @@
     text-align: center;
   }
   .bill {
+    display: flex;
+    .info-customer {
+      width: 50%;
+    }
+
     .title-bill {
       padding-bottom: 20px;
       font-size: 22px;
@@ -120,11 +122,12 @@
     }
   }
   .list-product {
+    width: 50%;
     padding-top: 20px;
     border-top: 1px solid #eee;
     .item-cart {
       margin-bottom: 20px;
-      border-bottom: 1px solid #eee;
+      border-bottom: 1px solid #d6d0d0;
       .item {
         position: relative;
         display: flex;

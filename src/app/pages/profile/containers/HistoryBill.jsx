@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getHistoryBill } from "../stores/action";
@@ -10,7 +10,6 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Switch from "@mui/material/Switch";
 
 import { convertDate } from "../../../shared/helpers/utils/convertDate";
 
@@ -59,8 +58,6 @@ const HistoryBill = () => {
     },
   ];
 
-  const label = { inputProps: { "aria-label": "Switch demo" } };
-
   return (
     <div className="section-profile">
       <div className="container">
@@ -74,33 +71,6 @@ const HistoryBill = () => {
                       <ul className="list-product-bill"></ul>
                     </li>
                   )
-                  // bill.listProduct.map((item1, index1) => (
-                  //   <li className="item-bill" key={`${index}-${index1}`}>
-                  //     <div className="description">
-                  //       <div className="img-product-bill">
-                  //         <img
-                  //           src={item1?.productImg}
-                  //           alt={item1?.productImg}
-                  //         />
-                  //       </div>
-                  //       <div className="info-product-bill">
-                  //         <p className="name-product">{item1?.productName}</p>
-                  //         <span className="quantity-product">
-                  //           {item1?.quantity}
-                  //         </span>
-                  //         <span className="price">{item1?.price}</span>
-                  //       </div>
-                  //     </div>
-                  //     <div className="action">
-                  //       <span className="time">{item?.createdAt}</span>
-                  //       <button
-                  //         className="btn btn-black"
-                  //         onClick={() => openModalRating()}
-                  //       >
-                  //         Đánh giá
-                  //       </button>
-                  //     </div>
-                  //   </li>
                 )
               : ""}
             {bill ? (
@@ -143,11 +113,7 @@ const HistoryBill = () => {
                                     key={column.id}
                                     align={column.align}
                                   >
-                                    <Switch
-                                      {...label}
-                                      style={{ textAlign: "center" }}
-                                      checked={value}
-                                    />
+                                    {value ? 'Đã thanh toán' : 'Chưa thanh toán'}
                                   </TableCell>
                                 );
                               }

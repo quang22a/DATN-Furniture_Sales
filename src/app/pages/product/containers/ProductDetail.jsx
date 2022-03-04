@@ -1,17 +1,16 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useForm } from "react-hook-form";
 import { useParams } from "react-router";
 
 import {
   getDetailProduct,
   getListCategory,
   getListBrand,
-  addRating,
   getRatings,
 } from "../stores/action";
 import { addToCartAction } from "../../cart/stores/action";
 import ListComment from "../components/ListComment";
+import { formatPrice } from '../../../shared/helpers/utils/formatPrice';
 
 const ProductDetail = () => {
   const dispatch = useDispatch();
@@ -58,7 +57,7 @@ const ProductDetail = () => {
             <div className="col-6">
               <h2 className="product-name">{productDetail.name}</h2>
               <div className="is-divider"></div>
-              <p className="price">{productDetail.price}</p>
+              <p className="price">{formatPrice(productDetail.price)}</p>
               <div className="product-attribute">
                 <p>Thương hiệu:</p>
                 <span>

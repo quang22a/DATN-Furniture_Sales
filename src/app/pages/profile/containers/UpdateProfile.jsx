@@ -6,6 +6,7 @@ import { useNavigate } from "react-router";
 
 import { Input } from "../../../shared/components/partials/Input";
 import { updateProfile } from "../stores/action";
+import { validateEmail, validatePhone } from "../../../shared/validate";
 
 const UpdateProfile = () => {
   const dispatch = useDispatch();
@@ -72,9 +73,7 @@ const UpdateProfile = () => {
               label="Số điện thoại"
               placeholder={"Số điện thoại"}
               id={"phone"}
-              validate={register("phone", {
-                required: "Bạn phải nhập số điện thoại",
-              })}
+              validate={register("phone", { ...validatePhone })}
               errors={errors.phone}
               para={""}
             />

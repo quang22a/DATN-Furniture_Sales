@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 import { setModal } from "../../../stores/modal/action";
 import { registerAction, setNull } from "../stores/action";
 import { Input } from "../../../shared/components/partials/Input";
-import { validateEmail } from "../../../shared/validate";
+import { validateEmail, validatePhone } from "../../../shared/validate";
 
 const Register = () => {
   const {
@@ -73,7 +73,7 @@ const Register = () => {
       type: "text",
       label: "Số điện thoại",
       className: "form-control",
-      validate: register("phone", { required: "Bạn phải nhập số điện thoại" }),
+      validate: register("phone", { ...validatePhone }),
       errors: errors.phone,
       para: "",
     },

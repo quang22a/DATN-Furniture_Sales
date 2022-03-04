@@ -14,17 +14,6 @@ export const Footer = () => {
               <div className="row">
                 <div className="col-4">
                   <p className="logo">Luxury House</p>
-                  <div className="follow">
-                    <p>Theo dõi chúng tôi</p>
-                    <div className="app">
-                      <a href="https://facebook.com" target="_blank">
-                        Facebook-
-                      </a>
-                      <a href="https://facebook.com" target="_blank">
-                        Instagram
-                      </a>
-                    </div>
-                  </div>
                 </div>
                 <div className="col-4">
                   <p className="title-footer">Về Luxury House</p>
@@ -36,21 +25,14 @@ export const Footer = () => {
                       <Link to="/product">Sản phẩm</Link>
                     </li>
                     <li className="item space">
-                      <Link to="/insurance">Bảo hành</Link>
-                    </li>
-                    <li className="item">
-                      <Link to="/delivery">Giao hàng</Link>
-                    </li>
-                    <li className="item">
-                      <Link to="/terms">Điều khoản riêng tư</Link>
+                      <Link to="/contact">Liên hệ</Link>
                     </li>
                   </ul>
                 </div>
                 <div className="col-4">
                   <p className="title-footer">Newsletter</p>
                   <p className="des">
-                    Hãy để lại email của bạn để nhận được những ý tưởng trang
-                    trí mới và những thông tin, ưu đãi từ Luxury House
+                    Liên lạc với chúng tôi qua: 0985747910
                   </p>
                 </div>
               </div>

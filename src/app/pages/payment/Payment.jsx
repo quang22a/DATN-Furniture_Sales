@@ -10,6 +10,7 @@ import { Input } from "../../shared/components/partials/Input";
 import { formatPrice } from "../../shared/helpers/utils/formatPrice";
 import { setModal } from "../../stores/modal/action";
 import { clearCart } from "../cart/stores/action";
+import { validateEmail, validatePhone } from "../../shared/validate";
 
 const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM});
 
@@ -89,8 +90,8 @@ const Payment = () => {
     }
     console.log(dataSubmit);
     // await dispatch(createBill(dataSubmit));
-    const socket = io.connect("https://datn-be.herokuapp.com");
-    // const socket = io.connect("http://localhost:8000");
+    // const socket = io.connect("https://datn-be.herokuapp.com");
+    const socket = io.connect("http://localhost:8000");
     socket.on("connect", () => {
       socket.emit("client-create-bill", dataSubmit);
     });
@@ -162,9 +163,7 @@ const Payment = () => {
                 label="Địa chỉ email"
                 placeholder={"Email"}
                 id={"email"}
-                validate={register("email", {
-                  required: "Bạn phải nhập email",
-                })}
+                validate={register("email", { ...validateEmail })}
                 errors={errors.email}
                 para={""}
               />
@@ -176,9 +175,7 @@ const Payment = () => {
                 label="Số điện thoại"
                 placeholder={"Số điện thoại"}
                 id={"phone"}
-                validate={register("phone", {
-                  required: "Bạn phải nhập số điện thoại",
-                })}
+                validate={register("phone", { ...validatePhone })}
                 errors={errors.phone}
                 para={""}
               />

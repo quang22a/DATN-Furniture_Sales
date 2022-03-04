@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
 import { useLocation, useNavigate } from "react-router";
 
 import qs from 'qs';
@@ -15,7 +13,6 @@ import {
   getListBrand,
 } from "../stores/action";
 import ProductRs from '../components/ProductRs';
-import { setTextSearch } from "../../../stores/search/action";
 
 const ListProductRenderer = PageRenderer(ListProduct);
 
