@@ -82,7 +82,6 @@ export const updatePassword = (data) => async (dispatch) => {
 export const getHistoryBill = () => async (dispatch) => {
   try {
     const response = await http.get([`${ENDPOINT.bill.index}-user`]);
-    console.log(response);
     dispatch({
       type: types.GET_HISTORY_BILL_SUCCESS,
       payload: response,

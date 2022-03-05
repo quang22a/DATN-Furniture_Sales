@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 
 import { Input } from "../../../shared/components/partials/Input";
 import { updateProfile } from "../stores/action";
-import { validateEmail, validatePhone } from "../../../shared/validate";
+import { validatePhone } from "../../../shared/validate";
 
 const UpdateProfile = () => {
   const dispatch = useDispatch();

@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
-import { setModal } from "../../../stores/modal/action";
 import { login } from "../stores/action";
 import { Input } from "../../../shared/components/partials/Input";
 import { validateEmail } from "../../../shared/validate";

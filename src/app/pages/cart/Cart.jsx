@@ -1,15 +1,12 @@
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from 'react';
+import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 import CartItem from "./components/CartItem";
-import { Input } from "../../shared/components/partials/Input";
 import { formatPrice } from "../../shared/helpers/utils/formatPrice";
 
 const CartPage = () => {
-  const { register, watch, control, setValue } = useForm();
-
   const listProductCart = useSelector((state) => state.cartReducer.data);
   const totalPrice = listProductCart.reduce((accumulator, currentItem) => {
     return (

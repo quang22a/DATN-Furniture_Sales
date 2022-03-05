@@ -35,16 +35,6 @@ const ProductRs = () => {
     });
   }, [listProductRs]);
 
-  const addToCart = (e, product) => {
-    let oldQuantity = 0;
-    for (let item of cart) {
-      if (item._id === product._id) {
-        oldQuantity = item.quantity;
-      }
-    }
-    dispatch(addToCartAction(product, oldQuantity + 1));
-    e.stopPropagation();
-  };
   return (
     <>
      {listProductRs && listProductRs.length > 0 ? (
@@ -75,14 +65,6 @@ const ProductRs = () => {
                         </div>
                       </div>
                     </Link>
-                    {location.pathname.indexOf("/products") !== -1 && (
-                      <button
-                        className="btn btn-primary btn-add-cart"
-                        onClick={(e) => addToCart(e, item)}
-                      >
-                        Thêm vào giỏ hàng
-                      </button>
-                    )}
                 </li>
               ))
             }

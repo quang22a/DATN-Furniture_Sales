@@ -1,5 +1,5 @@
 const ListComment = ({ data }) => {
-  console.log(data);
+
   return (
     <div className="comment-product">
       <ul className="list-comment">
