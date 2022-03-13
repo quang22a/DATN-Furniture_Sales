@@ -6,21 +6,18 @@ const intialState = {
   listRatings: null,
   dataList: null,
   dataDetail: null,
-  listRs: null,
   errorCategory: null,
   errorBrand: null,
   errorGetList: null,
   errorGetDetail: null,
   errorAddRating: null,
   errorListRating: null,
-  errorRs: null,
   msgCategory: null,
   msgBrand: null,
   msgGetList: null,
   msgGetDetail: null,
   msgAddRating: null,
   msgListRating: null,
-  msgRs: null,
 };
 
 export const productReducer = (state = intialState, action) => {
@@ -63,19 +60,6 @@ export const productReducer = (state = intialState, action) => {
         ...state,
         errorGetList: false,
         msgGetList: null,
-      };
-    case types.GET_LIST_PRODUCT_RS_SUCCESS:
-      return {
-        ...state,
-        listRs: action.payload.data,
-        errorRs: false,
-        msgRs: null,
-      };
-    case types.GET_LIST_PRODUCT_RS_FAIL:
-      return {
-        ...state,
-        errorRs: false,
-        msgRs: null,
       };
     case types.GET_LIST_PRODUCT_SUCCESS:
       return {
