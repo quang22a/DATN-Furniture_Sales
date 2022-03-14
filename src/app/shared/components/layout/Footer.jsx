@@ -22,7 +22,7 @@ export const Footer = () => {
                       <Link to="/">Trang chủ</Link>
                     </li>
                     <li className="item">
-                      <Link to="/product">Sản phẩm</Link>
+                      <Link to="/products">Sản phẩm</Link>
                     </li>
                     <li className="item space">
                       <Link to="/contact">Liên hệ</Link>
