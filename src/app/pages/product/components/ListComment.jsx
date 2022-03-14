@@ -9,7 +9,7 @@ const ListComment = ({ data }) => {
               <p className="comment-user">{item.customer[0]?.name}</p>
               <div>
                 {[...Array(item.rating)].map((item1, index1) => (
-                  <i class="material-icons-outlined icon-star" key={index1}>star</i>
+                  <i className="material-icons-outlined icon-star" key={index1}>star</i>
                 ))}
               </div>
               <p className="comment">{item.comment}</p>

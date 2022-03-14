@@ -141,7 +141,7 @@ const ProductBill = () => {
                   <div className="section-rating">
                     {[...Array(5)].map((item, index) => (
                       <i 
-                        class={`material-icons-outlined icon-star`}
+                        className={`material-icons-outlined icon-star`}
                         id={index + 1}
                         key={index}
                         onClick={(e) => {

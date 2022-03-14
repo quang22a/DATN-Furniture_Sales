@@ -61,6 +61,9 @@ const Payment = () => {
     setValue("address", profileUser?.address);
   }, [profileUser]);
 
+  // const socket = io.connect("http://localhost:8000");
+  const socket = io.connect("https://datn-be.herokuapp.com");
+
   const onSubmit = (method) => {
     const totalProduct = listProduct.reduce((accumulator, currentItem) => {
       return accumulator + currentItem.quantity;
@@ -88,8 +91,6 @@ const Payment = () => {
     if (!additional) {
       delete dataSubmit.additional;
     }
-    // const socket = io.connect("http://localhost:8000");
-    const socket = io.connect("https://datn-be.herokuapp.com/api/v1/");
     socket.on("connect", () => {
       socket.emit("client-create-bill", dataSubmit);
     });

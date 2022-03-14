@@ -13,11 +13,11 @@ import "./assets/stylesheet/styles.scss";
 const store = createStore(RootReducer, applyMiddleware(thunk, errorMiddleware));
 
 ReactDOM.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <Provider store={store}>
       <App />
-    </Provider>
-  </React.StrictMode>,
+    </Provider>,
+  // </React.StrictMode>,
   document.getElementById("root")
 );
 
