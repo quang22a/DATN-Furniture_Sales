@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
-import ReactDOM from "react-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
+import React, { useState, useEffect } from 'react';
+import ReactDOM from 'react-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router';
 
-import { io } from "socket.io-client";
+import { io } from 'socket.io-client';
 
-import { Input } from "../../shared/components/partials/Input";
-import { formatPrice } from "../../shared/helpers/utils/formatPrice";
-import { setModal } from "../../stores/modal/action";
-import { clearCart } from "../cart/stores/action";
-import { validateEmail, validatePhone } from "../../shared/validate";
+import { Input } from '../../shared/components/partials/Input';
+import { formatPrice } from '../../shared/helpers/utils/formatPrice';
+import { setModal } from '../../stores/modal/action';
+import { clearCart } from '../cart/stores/action';
+import { validateEmail, validatePhone } from '../../shared/validate';
 
-const PayPalButton = window.paypal.Buttons.driver("react", { React, ReactDOM});
+const PayPalButton = window.paypal.Buttons.driver('react', { React, ReactDOM });
 
 const Payment = () => {
   const dispatch = useDispatch();
@@ -24,17 +24,16 @@ const Payment = () => {
     handleSubmit,
     formState: { errors },
   } = useForm({
-    mode: "onChange",
-    reValidateMode: "onChange",
+    mode: 'onChange',
+    reValidateMode: 'onChange',
   });
-  const [additional, setAdditional] = useState("");
+  const [additional, setAdditional] = useState('');
   const [isSubmit, setIsSubmit] = useState(false);
   const listProduct = useSelector((state) => state.cartReducer.data);
   if (!listProduct || listProduct.length === 0) {
-    navigate("/products");
+    navigate('/products');
   }
   const profileUser = useSelector((state) => state.profileReducer.dataProfile);
-  const error = useSelector((state) => state.paymentReducer.errorCreate);
 
   const totalPrice = listProduct.reduce((accumulator, currentItem) => {
     return (
@@ -49,16 +48,16 @@ const Payment = () => {
     );
   }, 0);
   const totalPriceUsd = totalPrice / 23000;
-  const watchName = watch("name");
-  const watchEmail = watch("email");
-  const watchPhone = watch("phone");
-  const watchAdress = watch("address");
+  const watchName = watch('name');
+  const watchEmail = watch('email');
+  const watchPhone = watch('phone');
+  const watchAdress = watch('address');
 
   useEffect(() => {
-    setValue("name", profileUser?.name);
-    setValue("email", profileUser?.email);
-    setValue("phone", profileUser?.phone);
-    setValue("address", profileUser?.address);
+    setValue('name', profileUser?.name);
+    setValue('email', profileUser?.email);
+    setValue('phone', profileUser?.phone);
+    setValue('address', profileUser?.address);
   }, [profileUser]);
 
   const onSubmit = (method) => {
@@ -74,39 +73,43 @@ const Payment = () => {
       totalPrice,
       totalProduct,
       paymentMethod: method === 'Paypal' ? 'Paypal' : 'Cash',
-      paymentStatus: method === "Paypal" ? true : false,
+      paymentStatus: method === 'Paypal' ? true : false,
       additional: additional,
       listProducts: listProduct.map((item) => {
         return {
           productId: item._id,
           productName: item.name,
           quantity: item.quantity,
-          price: (item.price - item.price*item.discount/100) * item.quantity,
+          price:
+            (item.price - (item.price * item.discount) / 100) * item.quantity,
         };
       }),
     };
     if (!additional) {
       delete dataSubmit.additional;
     }
-    // const socket = io.connect("http://localhost:8000");
-    const socket = io.connect("https://datn-be.herokuapp.com");
-    socket.on("connect", () => {
-      socket.emit("client-create-bill", dataSubmit);
+    const socket = io.connect(
+      window.location.href.indexOf('localhost:7000') !== -1
+        ? 'http://localhost:8000'
+        : 'https://datn-be.herokuapp.com'
+    );
+    socket.on('connect', () => {
+      socket.emit('client-create-bill', dataSubmit);
     });
     setIsSubmit(true);
   };
 
   useEffect(() => {
-    if (isSubmit && !error) {
+    if (isSubmit) {
       dispatch(
         setModal({
-          key: "snapback",
-          title: "",
-          content: "Đặt hàng thành công",
+          key: 'snapback',
+          title: '',
+          content: 'Đặt hàng thành công',
         })
       );
       dispatch(clearCart());
-      navigate("/products");
+      navigate('/products');
     }
     setIsSubmit(false);
   }, [isSubmit]);
@@ -116,140 +119,140 @@ const Payment = () => {
       purchase_units: [
         {
           amount: {
-            currency_code: "USD",
+            currency_code: 'USD',
             value: totalPriceUsd.toFixed(0), // Can reference variables or functions. Example: `value: document.getElementById('...').value`
           },
         },
       ],
     });
-  }
+  };
   const onApprove = (data, actions) => {
     return actions.order.capture().then(function (orderData) {
       onSubmit('Paypal');
-      alert(
-        "Thanh toán thành công"
-      );
     });
-  }
+  };
 
   return (
-    <section className="section-payment">
-      <div className="container">
-        <form className="row" onSubmit={handleSubmit(onSubmit)}>
-          <div className="col-7">
-            <p className="title-info-payment text-uppercase">
+    <section className='section-payment'>
+      <div className='container'>
+        <form className='row' onSubmit={handleSubmit(onSubmit)}>
+          <div className='col-7'>
+            <p className='title-info-payment text-uppercase'>
               Địa chỉ giao hàng
             </p>
-            <div className="form-row">
+            <div className='form-row'>
               <Input
-                type="text"
-                className="form-control"
-                label="Họ tên"
-                placeholder={"Họ tên"}
-                id={"name"}
-                validate={register("name", {
-                  required: "Bạn phải nhập họ tên",
+                type='text'
+                className='form-control'
+                label='Họ tên'
+                placeholder={'Họ tên'}
+                id={'name'}
+                validate={register('name', {
+                  required: 'Bạn phải nhập họ tên',
                 })}
                 errors={errors.name}
-                para={""}
+                para={''}
               />
             </div>
-            <div className="form-row">
+            <div className='form-row'>
               <Input
-                type="email"
-                className="form-control"
-                label="Địa chỉ email"
-                placeholder={"Email"}
-                id={"email"}
-                validate={register("email", { ...validateEmail })}
+                type='email'
+                className='form-control'
+                label='Địa chỉ email'
+                placeholder={'Email'}
+                id={'email'}
+                validate={register('email', { ...validateEmail })}
                 errors={errors.email}
-                para={""}
+                para={''}
               />
             </div>
-            <div className="form-row">
+            <div className='form-row'>
               <Input
-                type="text"
-                className="form-control"
-                label="Số điện thoại"
-                placeholder={"Số điện thoại"}
-                id={"phone"}
-                validate={register("phone", { ...validatePhone })}
+                type='text'
+                className='form-control'
+                label='Số điện thoại'
+                placeholder={'Số điện thoại'}
+                id={'phone'}
+                validate={register('phone', { ...validatePhone })}
                 errors={errors.phone}
-                para={""}
+                para={''}
               />
             </div>
-            <div className="form-row">
+            <div className='form-row'>
               <Input
-                type="text"
-                className="form-control"
-                label="Địa chỉ"
-                placeholder={"Địa chỉ"}
-                id={"address"}
-                validate={register("address", {
-                  required: "Bạn phải nhập địa chỉ",
+                type='text'
+                className='form-control'
+                label='Địa chỉ'
+                placeholder={'Địa chỉ'}
+                id={'address'}
+                validate={register('address', {
+                  required: 'Bạn phải nhập địa chỉ',
                 })}
                 errors={errors.address}
-                para={""}
+                para={''}
               />
             </div>
-            <div className="additional-field">
-              <p className="title-info-payment text-uppercase">
+            <div className='additional-field'>
+              <p className='title-info-payment text-uppercase'>
                 Thông tin thêm
               </p>
-              <p className="note">Lưu ý cho đơn hàng (tùy chọn)</p>
+              <p className='note'>Lưu ý cho đơn hàng (tùy chọn)</p>
               <textarea
-                className="text-additional"
-                name="additional"
-                id="additional"
-                rows="4"
-                placeholder="Viết lưu ý cho cửa hàng, ví dụ: lưu ý khi vận chuyển."
+                className='text-additional'
+                name='additional'
+                id='additional'
+                rows='4'
+                placeholder='Viết lưu ý cho cửa hàng, ví dụ: lưu ý khi vận chuyển.'
                 onChange={(e) => setAdditional(e.target.value)}
               />
             </div>
           </div>
-          <div className="col-5">
-            <div className="summary-order">
-              <p className="title">Tóm tắt đơn hàng</p>
-              <div className="info-cart">
-                <span className="left">Thành tiền</span>
-                <span className="right price">{formatPrice(totalPrice)}</span>
+          <div className='col-5'>
+            <div className='summary-order'>
+              <p className='title'>Tóm tắt đơn hàng</p>
+              <div className='info-cart'>
+                <span className='left'>Thành tiền</span>
+                <span className='right price'>{formatPrice(totalPrice)}</span>
               </div>
-              <div className="info-cart border-bottom">
-                <span className="left">Vận chuyển</span>
-                <span className="right">
+              <div className='info-cart border-bottom'>
+                <span className='left'>Vận chuyển</span>
+                <span className='right'>
                   Phí vận chuyển sẽ từ 10.000 - 30.000đ. Vui lòng thanh toán cho
                   bên giao hàng
                 </span>
               </div>
-              <div className="info-cart">
-                <span className="left">Tổng cộng</span>
-                <span className="right price">{formatPrice(totalPrice)}</span>
+              <div className='info-cart'>
+                <span className='left'>Tổng cộng</span>
+                <span className='right price'>{formatPrice(totalPrice)}</span>
               </div>
-              <div className="products">
-                <p className="title">Sản phẩm</p>
-                <ul className="list-cart">
+              <div className='products'>
+                <p className='title'>Sản phẩm</p>
+                <ul className='list-cart'>
                   {listProduct.map((item, index) => (
-                    <li className="item-cart" key={index}>
-                      <div className="img-product-cart">
+                    <li className='item-cart' key={index}>
+                      <div className='img-product-cart'>
                         <img src={item.image} alt={item.name} />
                       </div>
-                      <div className="info-product-cart">
-                        <p className="name-product">{item.name}</p>
-                        <span className="quantity-product">x1</span>
-                        <span className="price">
-                          {formatPrice((item.price || 0) - (item.price || 0)*(item.discount || 0)/100)}
+                      <div className='info-product-cart'>
+                        <p className='name-product'>{item.name}</p>
+                        <span className='quantity-product'>x1</span>
+                        <span className='price'>
+                          {formatPrice(
+                            (item.price || 0) -
+                              ((item.price || 0) * (item.discount || 0)) / 100
+                          )}
                         </span>
                       </div>
                     </li>
                   ))}
                 </ul>
                 <div>
-                  <PayPalButton 
+                  <PayPalButton
                     createOrder={(data, actions) => createOrder(data, actions)}
                     onApprove={(data, actions) => onApprove(data, actions)}
                   />
                 </div>
-                <button type="submit" className="btn btn-primary">
+                <button type='submit' className='btn btn-primary'>
                   Thanh toán bằng tiền mặt
                 </button>
               </div>
