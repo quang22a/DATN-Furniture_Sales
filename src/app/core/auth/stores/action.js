@@ -1,9 +1,9 @@
-import * as types from "./types";
-import { AuthService } from "../../services/auth.service";
-import { ApiService } from "../../services/api.service";
-import { ENDPOINT } from "../../../../config/endpoint";
+import * as types from './types';
+import { AuthService } from '../../services/auth.service';
+import { ApiService } from '../../services/api.service';
+import { ENDPOINT } from '../../../../config/endpoint';
 
-import { setModal } from "../../../stores/modal/action";
+import { setModal } from '../../../stores/modal/action';
 
 const http = new AuthService();
 const api = new ApiService();
@@ -11,18 +11,28 @@ const api = new ApiService();
 export const login = (dataLogin, navigate) => async (dispatch) => {
   try {
     const response = await http.signIn(dataLogin);
-    dispatch(
-      setModal({
-        key: "snapback",
-        title: "",
-        content: "Đăng nhập thành công",
-      })
-    );
-    dispatch({
-      type: types.LOGIN_SUCCESS,
-      payload: response,
-    });
-    navigate('/');
+    if (response?.role !== 'customer') {
+      dispatch(
+        setModal({
+          key: 'error',
+          title: 'Error',
+          content: 'Tài khoản hoặc mật khẩu không chính xác',
+        })
+      );
+    } else {
+      dispatch(
+        setModal({
+          key: 'snapback',
+          title: '',
+          content: 'Đăng nhập thành công',
+        })
+      );
+      dispatch({
+        type: types.LOGIN_SUCCESS,
+        payload: response,
+      });
+      navigate('/');
+    }
   } catch (error) {
     dispatch({
       type: types.LOGIN_FAIL,
@@ -60,7 +70,7 @@ export const registerAction = (data) => async (dispatch) => {
 export const setNull = () => {
   return {
     type: types.SET_REGISTER_NULL,
-    payload: "set null",
+    payload: 'set null',
   };
 };
 
@@ -73,8 +83,8 @@ export const requestResetPassword = (data) => async (dispatch) => {
     });
     dispatch(
       setModal({
-        key: "snapback",
-        title: "",
+        key: 'snapback',
+        title: '',
         content: response.msg,
       })
     );
@@ -101,9 +111,9 @@ export const changePasswordReset = (data) => async (dispatch) => {
     });
     dispatch(
       setModal({
-        key: "snapback",
-        title: "",
-        content: "Reset password success",
+        key: 'snapback',
+        title: '',
+        content: 'Reset password success',
       })
     );
   } catch (error) {
