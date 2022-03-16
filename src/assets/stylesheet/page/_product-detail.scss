@@ -23,6 +23,11 @@
     .price {
       padding: 10px 0;
       font-size: 16px;
+      &.discount-price {
+        margin-bottom: 5px;
+        margin-top: 5px;
+        color: map-get($color, red);
+      }
     }
     .product-attribute {
       padding: 14px 0;
